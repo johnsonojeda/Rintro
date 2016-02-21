@@ -1,0 +1,102 @@
+,title,year,runtime,network,country,language,genres,aired_episodes,airs_day,airs_time
+1,Game of Thrones,2011,60,HBO,us,en,drama,50,Sunday,21:00
+2,Breaking Bad,2008,45,AMC,us,en,drama,62,Sunday,21:00
+3,The Big Bang Theory,2007,25,CBS,us,en,comedy,192,Thursday,20:00
+4,The Walking Dead,2010,42,AMC,us,en,drama,75,Sunday,21:00
+5,Dexter,2006,60,Showtime,us,en,crime,96,NA,NA
+6,How I Met Your Mother,2005,25,CBS,us,en,comedy,208,Monday,20:00
+7,Sherlock,2010,90,BBC One,gb,en,drama,9,Sunday,20:30
+8,Arrow,2012,43,The CW,us,en,drama,78,Wednesday,20:00
+9,Homeland,2011,45,Showtime,us,en,drama,58,Sunday,21:00
+10,Fringe,2008,42,FOX (US),us,en,drama,100,NA,NA
+11,House,2004,45,FOX (US),us,en,comedy,176,NA,NA
+12,Lost,2004,45,ABC (US),us,en,drama,120,Tuesday,21:00
+13,Friends,1994,25,NBC,us,en,comedy,236,Thursday,20:00
+14,Suits,2011,42,USA Network,us,en,drama,70,Wednesday,21:00
+15,Supernatural,2005,45,The CW,us,en,drama,227,Wednesday,21:00
+16,House of Cards,2013,60,Netflix,us,en,drama,39,Friday,3:01
+17,Modern Family,2009,25,ABC (US),us,en,comedy,153,Wednesday,21:00
+18,Doctor Who,2005,45,BBC One,gb,en,drama,115,Saturday,20:30
+19,The Simpsons,1989,25,FOX (US),us,en,animation,582,Sunday,20:00
+20,Community,2009,25,Yahoo! Screen,us,en,comedy,110,Tuesday,3:00
+21,True Detective,2014,60,HBO,us,en,drama,16,Sunday,21:00
+22,True Blood,2008,60,HBO,us,en,drama,80,Sunday,21:00
+23,Orange Is the New Black,2013,60,Netflix,us,en,comedy,39,Friday,4:00
+24,American Horror Story,2011,50,FX,us,en,drama,60,Wednesday,22:00
+25,Marvel's Agents of S.H.I.E.L.D.,2013,43,ABC (US),us,en,action,54,Tuesday,21:00
+26,Person of Interest,2011,45,CBS,us,en,drama,90,Tuesday,22:00
+27,Firefly,2002,60,FOX (US),us,en,drama,14,NA,NA
+28,Once Upon a Time,2011,45,ABC (US),us,en,drama,100,Sunday,20:00
+29,Family Guy,1999,25,FOX (US),us,en,animation,257,Sunday,21:00
+30,New Girl,2011,25,FOX (US),us,en,comedy,94,Tuesday,20:00
+31,Futurama,1999,22,Comedy Central,us,en,animation,124,Wednesday,22:00
+32,South Park,1997,25,Comedy Central,us,en,animation,267,Wednesday,22:00
+33,Battlestar Galactica,2003,45,SciFi,us,en,drama,73,NA,NA
+34,Prison Break,2005,60,FOX (US),us,en,drama,79,Monday,21:00
+35,Sons of Anarchy,2008,60,FX,us,en,drama,92,Tuesday,22:00
+36,Hannibal,2013,45,NBC,us,en,drama,39,Sunday,22:00
+37,Chuck,2007,43,NBC,us,en,comedy,91,Friday,20:00
+38,The Vampire Diaries,2009,43,The CW,us,en,drama,141,Thursday,20:00
+39,Castle,2009,45,ABC (US),us,en,drama,159,Monday,22:00
+40,Vikings,2013,60,History,ca,en,drama,29,Thursday,22:00
+41,Californication,2007,30,Showtime,us,en,comedy,84,Sunday,21:30
+42,Under the Dome,2013,45,CBS,us,en,crime,39,Thursday,22:00
+43,The Mentalist,2008,45,CBS,us,en,drama,151,Wednesday,20:00
+44,Elementary,2012,43,CBS,us,en,crime,76,Thursday,22:00
+45,The Flash,2014,45,The CW,us,en,action,32,Tuesday,20:00
+46,Heroes,2006,43,NBC,us,en,drama,78,Monday,20:00
+47,Band of Brothers,2001,60,HBO,us,en,drama,10,NA,NA
+48,The Blacklist,2013,45,NBC,us,en,crime,52,Thursday,21:00
+49,White Collar,2009,45,USA Network,us,en,drama,81,Thursday,21:00
+50,Grey's Anatomy,2005,43,ABC (US),us,en,drama,252,Thursday,20:00
+51,The IT Crowd,2006,25,Channel 4,gb,en,comedy,24,NA,NA
+52,Spartacus,2010,60,Starz!,us,en,drama,33,Friday,21:00
+53,Parks and Recreation,2009,22,NBC,us,en,comedy,125,Tuesday,20:00
+54,Arrested Development,2003,30,Netflix,us,en,comedy,68,Sunday,12:00
+55,24,2001,45,FOX (US),us,en,drama,204,NA,NA
+56,The Wire,2002,60,HBO,us,en,drama,60,Sunday,21:00
+57,Scrubs,2001,20,ABC (US),us,en,comedy,181,NA,NA
+58,The Office,2005,20,NBC,us,en,comedy,195,NA,NA
+59,Orphan Black,2013,45,BBC America,us,en,thriller,30,Saturday,21:00
+60,Two and a Half Men,2003,25,CBS,us,en,comedy,262,Thursday,21:00
+61,Falling Skies,2011,45,TNT,us,en,action,52,Sunday,22:00
+62,Mad Men,2007,45,AMC,us,en,drama,92,Sunday,22:00
+63,Top Gear,2002,60,BBC Two,gb,en,comedy,171,Thursday,20:00
+64,Boardwalk Empire,2010,60,HBO,us,en,crime,56,Sunday,21:00
+65,Bones,2005,40,FOX (US),us,en,comedy,220,Thursday,20:00
+66,Grimm,2011,45,NBC,us,en,drama,93,Friday,21:00
+67,The Sopranos,1999,60,HBO,us,en,drama,86,Sunday,21:00
+68,Shameless (US),2011,60,Showtime,us,en,comedy,60,Sunday,21:00
+69,Revolution,2012,45,NBC,us,en,drama,42,NA,NA
+70,Gotham,2014,45,FOX (US),us,en,crime,33,Monday,20:00
+71,2 Broke Girls,2011,25,CBS,us,en,comedy,97,Thursday,21:30
+72,Archer,2009,20,FXX,us,en,animation,72,Thursday,22:00
+73,Revenge,2011,45,ABC (US),us,en,drama,89,Sunday,22:00
+74,Fargo,2014,45,FX (US),us,en,drama,19,Monday,22:00
+75,Glee,2009,45,FOX (US),us,en,comedy,121,Friday,21:00
+76,Continuum,2012,45,Showcase (CA),ca,en,drama,42,Friday,21:00
+77,The 100,2014,45,The CW,us,en,adventure,29,Wednesday,21:00
+78,The Following,2013,45,FOX (US),us,en,drama,45,Monday,21:00
+79,The Newsroom,2012,60,HBO,us,en,drama,25,Sunday,21:00
+80,Stargate SG-1,1997,45,Showtime,us,en,adventure,214,Friday,20:00
+81,The X-Files,1993,45,FOX (US),us,en,drama,202,Monday,20:00
+82,Avatar: The Last Airbender,2005,20,Nickelodeon,us,en,animation,61,Saturday,11:00
+83,Misfits,2009,45,E4,gb,en,comedy,37,Sunday,22:00
+84,Weeds,2005,25,Showtime,us,en,comedy,102,Sunday,22:00
+85,Pretty Little Liars,2010,45,Freeform,us,en,drama,131,Tuesday,20:30
+86,Seinfeld,1989,25,NBC,us,en,comedy,180,Thursday,21:00
+87,Brooklyn Nine-Nine,2013,25,FOX (US),us,en,comedy,54,Sunday,20:30
+88,Teen Wolf,2011,45,MTV (US),us,en,drama,70,Tuesday,22:00
+89,Marvel's Daredevil,2015,60,Netflix,us,en,action,13,Friday,4:00
+90,Buffy the Vampire Slayer,1997,60,The WB,us,en,comedy,144,NA,NA
+91,30 Rock,2006,25,NBC,us,en,comedy,138,Thursday,20:00
+92,Criminal Minds,2005,45,CBS,us,en,drama,243,Wednesday,21:00
+93,NCIS,2003,44,CBS,us,en,drama,292,Tuesday,20:00
+94,Lie to Me,2009,45,FOX (US),us,en,crime,48,NA,NA
+95,Eureka,2006,44,SciFi,us,en,comedy,77,NA,NA
+96,Downton Abbey,2010,50,ITV,gb,en,drama,47,Sunday,21:00
+97,It's Always Sunny in Philadelphia,2005,25,FXX,us,en,comedy,113,Wednesday,22:00
+98,Mr. Robot,2015,43,USA Network,us,en,drama,10,Wednesday,22:00
+99,Smallville,2001,45,The CW,us,en,drama,216,Friday,20:00
+100,Almost Human,2013,43,FOX (US),us,en,action,13,NA,NA
+,,,,,,,,,,

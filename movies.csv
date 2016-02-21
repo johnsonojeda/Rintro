@@ -1,0 +1,101 @@
+,title,year,released,runtime,rating,votes,language,genres,certification
+1,The Dark Knight,2008,18-07-08,152,9.10341,20984,en,action,PG-13
+2,Inception,2010,16-07-10,148,8.83094,21170,en,action,PG-13
+3,The Avengers,2012,04-05-12,143,8.40788,20376,en,action,PG-13
+4,The Matrix,1999,30-03-99,136,8.97782,17766,en,action,R
+5,Guardians of the Galaxy,2014,01-08-14,121,8.37605,17064,en,adventure,PG-13
+6,Fight Club,1999,14-10-99,139,9.00934,16166,en,drama,R
+7,Avatar,2009,18-12-09,162,7.82862,16180,en,action,PG-13
+8,Iron Man,2008,02-05-08,126,8.36431,15388,en,action,PG-13
+9,Frozen,2013,27-11-13,102,7.86937,15701,en,adventure,PG
+10,The Lord of the Rings: The Fellowship of the Ring,2001,19-12-01,178,8.82383,14804,en,action,PG-13
+11,The Dark Knight Rises,2012,20-07-12,165,8.40524,15006,en,action,PG-13
+12,Interstellar,2014,05-11-14,169,8.54814,14228,en,science-fiction,PG-13
+13,The Lord of the Rings: The Return of the King,2003,01-12-03,201,8.94832,13893,en,action,PG-13
+14,Django Unchained,2012,25-12-12,165,8.57049,14095,en,drama,R
+15,Batman Begins,2005,15-06-05,140,8.44055,14137,en,action,PG-13
+16,The Lord of the Rings: The Two Towers,2002,18-12-02,179,8.83038,13619,en,action,PG-13
+17,The Hobbit: An Unexpected Journey,2012,14-12-12,169,8.0872,14014,en,action,PG-13
+18,The Hunger Games,2012,23-03-12,142,7.64249,14405,en,adventure,PG-13
+19,The Wolf of Wall Street,2013,25-12-13,180,8.10453,13661,en,comedy,R
+20,Finding Nemo,2003,30-05-03,100,8.31684,13177,en,animation,G
+21,Up,2009,13-05-09,96,8.44532,12975,en,adventure,PG
+22,WALL·E,2008,22-06-08,98,8.55921,12793,en,animation,G
+23,Pulp Fiction,1994,14-10-94,154,8.88539,12303,en,crime,R
+24,Captain America: The Winter Soldier,2014,04-04-14,136,8.01799,12899,en,action,PG-13
+25,Edge of Tomorrow,2014,06-06-14,113,8.0258,12829,en,action,PG-13
+26,Despicable Me,2010,08-07-10,95,8.15937,12681,en,animation,PG
+27,The Hunger Games: Catching Fire,2013,22-11-13,146,7.91943,12859,en,action,PG-13
+28,Back to the Future,1985,03-07-85,116,8.7675,12172,en,adventure,PG
+29,Iron Man 3,2013,03-05-13,130,7.74529,12736,en,action,PG-13
+30,The Shawshank Redemption,1994,14-09-94,142,9.29882,11542,en,crime,R
+31,Forrest Gump,1994,22-06-94,142,8.70954,11871,en,comedy,PG-13
+32,Iron Man 2,2010,07-05-10,124,7.67,12415,en,action,PG-13
+33,Star Wars: Episode IV - A New Hope,1977,25-05-77,121,8.79682,11556,en,action,PG
+34,X-Men: Days of Future Past,2014,23-05-14,131,8.07473,12057,en,action,PG-13
+35,Gravity,2013,04-10-13,91,7.80068,12031,en,drama,PG-13
+36,"Monsters, Inc.",2001,01-11-01,92,8.38012,11562,en,animation,G
+37,The Hobbit: The Desolation of Smaug,2013,13-12-13,161,8.07303,11489,en,fantasy,PG-13
+38,Star Wars: Episode V - The Empire Strikes Back,1980,17-05-80,124,8.90368,10558,en,action,PG
+39,V for Vendetta,2005,11-12-05,132,8.48293,10544,en,action,R
+40,Captain America: The First Avenger,2011,22-07-11,124,7.41452,11254,en,action,PG-13
+41,How to Train Your Dragon,2010,05-03-10,98,8.46075,10522,en,adventure,PG
+42,Toy Story,1995,21-11-95,81,8.43729,10469,en,animation,G
+43,The Lion King,1994,23-06-94,89,8.60709,10318,en,animation,G
+44,Star Wars: Episode VI - Return of the Jedi,1983,25-05-83,135,8.75594,10178,en,action,PG
+45,Thor,2011,06-05-11,115,7.38275,10994,en,action,PG-13
+46,Inglourious Basterds,2009,21-08-09,153,8.35718,10303,en,action,R
+47,Se7en,1995,22-09-95,127,8.72519,9985,en,crime,R
+48,The Hangover,2009,05-06-09,100,7.91655,10330,en,comedy,R
+49,Now You See Me,2013,31-05-13,115,7.71678,10409,en,crime,PG-13
+50,Man of Steel,2013,14-06-13,143,7.27228,10669,en,action,PG-13
+51,Thor: The Dark World,2013,08-11-13,112,7.49045,10423,en,action,PG-13
+52,Despicable Me 2,2013,03-07-13,98,7.9744,10041,en,animation,PG
+53,Star Trek Into Darkness,2013,16-05-13,132,8.065,9954,en,action,PG-13
+54,Gladiator,2000,01-05-00,155,8.58099,9618,en,action,R
+55,The Amazing Spider-Man,2012,04-07-12,136,7.41639,10334,en,action,PG-13
+56,Sherlock Holmes,2009,25-12-09,128,7.94677,9920,en,action,PG-13
+57,Star Trek,2009,07-05-09,127,8.3042,9701,en,action,PG-13
+58,World War Z,2013,21-06-13,116,7.22076,10405,en,action,PG-13
+59,Harry Potter and the Philosopher's Stone,2001,04-11-01,152,7.97754,9886,en,adventure,PG
+60,Pirates of the Caribbean: The Curse of the Black Pearl,2003,09-07-03,143,8.16716,9751,en,action,PG-13
+61,Gone Girl,2014,03-10-14,145,8.17242,9616,en,drama,R
+62,Divergent,2014,21-03-14,139,7.1546,10246,en,action,PG-13
+63,Skyfall,2012,09-11-12,143,7.86321,9752,en,action,PG-13
+64,Big Hero 6,2014,07-11-14,102,8.24086,9404,en,action,PG
+65,The Incredibles,2004,04-11-04,115,8.07102,9420,en,animation,PG
+66,X-Men: First Class,2011,24-05-11,132,8.05495,9426,en,action,PG-13
+67,Pacific Rim,2013,12-07-13,131,7.39623,9767,en,action,PG-13
+68,Mad Max: Fury Road,2015,15-05-15,120,8.00555,9373,en,action,R
+69,Lucy,2014,25-07-14,89,6.74432,10173,en,action,R
+70,Wreck-It Ralph,2012,01-11-12,108,8.04779,9270,en,adventure,PG
+71,Harry Potter and the Deathly Hallows: Part 2,2011,07-07-11,130,8.33452,9001,en,adventure,PG-13
+72,The Prestige,2006,19-10-06,130,8.5656,8819,en,drama,PG-13
+73,300,2006,09-12-06,117,7.87812,9189,en,action,R
+74,Jurassic Park,1993,08-06-93,127,8.25101,8944,en,adventure,PG-13
+75,Kingsman: The Secret Service,2015,13-01-15,130,8.00022,9079,en,action,R
+76,Toy Story 3,2010,17-06-10,103,8.35627,8864,en,animation,G
+77,The Imitation Game,2014,14-11-14,113,8.29385,8882,en,drama,PG-13
+78,Avengers: Age of Ultron,2015,01-05-15,141,7.87208,9084,en,science-fiction,PG-13
+79,The Maze Runner,2014,19-09-14,113,7.27716,9399,en,action,PG-13
+80,Shutter Island,2010,18-02-10,138,8.16232,8705,en,drama,R
+81,Harry Potter and the Prisoner of Azkaban,2004,31-05-04,141,8.09526,8734,en,adventure,PG
+82,The Lego Movie,2014,07-02-14,100,8.00777,8749,en,action,PG
+83,Jurassic World,2015,12-06-15,124,7.32812,9140,en,action,PG-13
+84,Oblivion,2013,18-04-13,126,7.322,9118,en,action,PG-13
+85,Harry Potter and the Chamber of Secrets,2002,03-11-02,161,7.86533,8673,en,adventure,PG
+86,Back to the Future Part II,1989,20-11-89,108,8.46597,8273,en,action,PG
+87,The Green Mile,1999,10-12-99,189,8.69203,8163,en,crime,R
+88,Ted,2012,29-06-12,106,7.03531,9063,en,comedy,R
+89,Memento,2000,11-10-00,113,8.62397,8167,en,mystery,R
+90,Zombieland,2009,03-12-09,88,8.16277,8331,en,comedy,R
+91,The Silence of the Lambs,1991,14-02-91,118,8.65652,8015,en,crime,R
+92,Elysium,2013,09-08-13,109,7.06586,8852,en,action,R
+93,Harry Potter and the Deathly Hallows: Part 1,2010,19-11-10,146,8.09613,8260,en,adventure,PG-13
+94,The Bourne Identity,2002,06-06-02,119,8.33148,8115,en,action,PG-13
+95,Brave,2012,21-06-12,93,7.62532,8474,en,action,PG
+96,Shrek,2001,16-05-01,90,8.03925,8203,en,adventure,PG
+97,Kick-Ass,2010,16-04-10,117,7.94852,8237,en,action,R
+98,Harry Potter and the Goblet of Fire,2005,05-11-05,157,7.94604,8229,en,adventure,PG-13
+99,Leon: The Professional,1994,14-09-94,110,8.79617,7732,fr,crime,R
+100,Raiders of the Lost Ark,1981,12-06-81,115,8.60714,7812,en,action,PG
