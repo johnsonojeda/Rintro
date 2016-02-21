@@ -1,0 +1,256 @@
+g---
+title: "Introduction to R | Data Manipulation"
+author: "EcoHealth Alliance"
+date: "February 1, 2016"
+output: html_document
+---
+
+<img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
+
+## Contents
+
+[Dataframes](#df)
+
+[Loading dataframes](#load)
+
+[Drop or add columns](#drop)
+
+[Data summary](#dsum)
+
+[Change column names](#colname)
+
+[Subsetting the dataframe](#subset)
+
+
+## <a name = "df"><a/>Dataframes 
+
+Data can be stored in tables as dataframe objects. We can create dataframes by merging different vectors of the same length with the data.frame() function. 
+
+```{r}
+numbers = c(1,2,3)                         # Create 3 vectors of equal length
+
+letters = c("a", "b", "c")
+
+logical = c(TRUE, TRUE, FALSE)
+
+df = data.frame(numbers, letters, logical) # Create data-frame
+
+df                                         # Print data-frame                     
+```
+
+There are a few dataframes built-in to R that can be loaded by calling upon them. For example the *mtcars* dataset, containing automobile desing and performance information:
+
+```{r}
+
+head(mtcars)          # View first 6 rows of the dataframe
+```
+
+The first row in a dataframe is called the *header* and holds all  column (variable) names. The first column of the dataframe usually consists of rownames. However, rownames aren't always present in dataframes. All rows after the *header* are called *data rows*. Each member of a row is called a *cell*. 
+
+We can find out how many rows and columns are in our dataframe
+
+```{r}
+
+nrow(mtcars)    # Number of rows in mtcars
+
+ncol(mtcars) # Number of columns in mtcars
+```
+
+We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.
+
+```{r}
+mtcars[2,3]   # Value from second row and third column
+```
+
+This is also possible using column and row names 
+
+```{r}
+
+mtcars["Mazda RX4 Wag", "disp"]
+```
+
+### EXERCISE 1
+
+1. Create the following vectors and merge them to create a dataframe  
+- grade = [A, B, A, C, D, B] 
+- subject = [Science, Geography, Math, English, History, French]
+- credits  = [4,4,3,2,3,3]
+
+
+2. Determine the number of rows and columns in the dataframe.
+
+***
+
+##<a name = "load"><a/> Loading dataframes
+
+However, most of the time we will probably work with an existing data, either generated at the lab, gathered on the field or downloaded from a publicly available database. 
+
+We are able to load  these data files on the R interface from our directory. We strongly recommend the use of flat text files (e.g. csv) rather than spreadsheets to store data since this makes loading and manipulating in R easier.  
+
+To load an existing file we can use the read.csv() function and specifying the file path. For example, to load the *movies.csv* file that is in your *data* folder:
+
+```{r}
+movies= read.csv(file = paste(getwd(), "data/movies.csv", sep= "/"), sep = ",", header = T )   # load the .csv file 
+
+head(movies)              # print the first six rows of the table
+```
+
+We have now loaded our dataframe and can see the first 6 rows containing data. 
+
+## EXERCISE 2
+
+1. Load the *tv_show.csv* file in your doc folder, then print the first six rows of your data.
+
+***
+
+## <a name = "drop"><a/> Drop or add columns
+
+More often than not, dataframes are not structured in a way that is most practical for our analyses. Handling large dataframes may be complicated, data might lack information that we need, etc. We are able to perform several manipulations to dataframes to make handling data more convenient. 
+
+**Dropping columns:** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable. 
+
+For example, in our *movies* dataframe the first column **X** is a number for each row, which doesn't provide any relevant information.  We can modify the dataframe by specifying columns we wish to retain:
+
+```{r}
+
+movies2 = movies[,2:10] # Create new dataframe with columns 2-10 only
+
+head(movies2)
+```
+
+Another way to do this is by specifying which column is to be dropped preceded by the *minus* (-) sign as follows:
+
+```{r}
+
+movies2 = movies[,-1] # New dataframe without the first column 
+
+names(movies2)        # Print column names of the new dataframe
+```
+
+**Adding columns** : Other times we might want to add information to a dataframe. This is done with the *cbind* function, as with vectors or matrices. 
+
+Let's assume we wish to add the **X** column to the *movies2* dataframe:
+
+```{r}
+
+X = movies$X                # Create a vector with all the values of X
+
+names(movies2)              # Column names before adding X
+
+movies2 = cbind(X, movies2) # Add X column
+
+names(movies2)             # Column names after adding X
+```
+
+Keep in mind that the order in which you enter the elements in the *cbind* function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column. 
+
+###EXCERCISE 3
+
+1. Drop the following columns from your dataframe : X, country, airs_time
+
+2. Add country and airs_time back in the dataframe (remember to create vectors for these columns before dropping them)
+
+***
+
+## <a name = "dsum"><a/>Data summary 
+
+We can take a quick glimpse of our dataframe by using str(). 
+
+```{r}
+
+str(movies)
+```
+
+This will let us visualize names, data type and first elements of each column.  
+
+We can easily change the class of a specific column to facilitate data manipulation. For example, **title** is currently a *factor*. Factors are useful when you have a limited set of options (levels) to choose from (e.g. male or female). Since movie titles may have an infinite amount of names, it is more appropriate to classify them as *characters*.
+
+We can coerce this column into character and verify the class change in the same way as you would do with vectors.
+
+```{r}
+
+movies$title = as.character(movies$title)
+
+class(movies$title)
+
+```
+
+### EXCERCISE 4
+
+1. Summarize your dataframe.
+
+2. Change the **title** and **network** column classes to the most appropriate one for this type of data. Why do you consider this class to be better?
+
+***
+
+## <a name = "colname"><a/>Change column names
+
+Column and row names can be changed by the colnames() and rownames() functions respectively.
+
+```{r}
+movies3 = head(movies)        # New dataframe with only 6 rows
+
+names(movies3)
+
+colnames(movies3) = c("ID", "Title", "Year", "Released", "Runtime", "Rating", "Votes", "Language", "Genres", "Certification")             # Change column names
+
+rownames(movies3) = c("MOV1", "MOV2", "MOV3", "MOV4", "MOV5", "MOV6") # Change row names
+
+head(movies3)
+```
+
+You can also change the name of a particular column by specifying its number
+
+```{r}
+colnames(movies3)[8]  = "Lang" # Specifiy the number of the column being renamed
+
+names(movies3)[8]              # Print new column name
+```
+
+***
+
+## <a name = "subset"><a/>Subsetting the dataframe
+
+There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in action movies.
+
+```{r}
+
+action = movies[movies$genres == "action",]  # Get all rows with genres equal to action
+                                             # The comma is important here
+
+head(action)
+
+```
+
+Or we might want to know which movies are shorter than 100 minutues. We can do this by using mathematical operators
+
+```{r}
+
+short = movies[movies$runtime < 100,]   # Get all rows with runtime under 100 
+                                        # The comma is important here
+
+head(short)                             # Print first values of the dataframe
+```
+
+
+Furthermore, we can exclude rows with certain values by using logical operators
+
+```{r}
+
+french = movies[movies$lang != "en",] # Get all rows with language different from English
+                                      # != means different than
+head(french)
+```
+
+### EXCERCISE
+
+From your tv shows data frame create different subsets for:
+
+1. All shows that air on Thursday
+
+2. All shows that are longer than 50 minutes
+
+3. All shows except those that appear on HBO
+
+
+

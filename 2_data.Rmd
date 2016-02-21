@@ -1,0 +1,310 @@
+---
+title: "Introduction to R | Data"
+theme : united
+author: "EcoHealth Alliance"
+output: html_document
+highlight: tango
+---
+<img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
+
+## Contents
+
+[Variable Assignment](#varas)
+
+[Data Type](#datatype)
+
+[Numeric & Integers](#numint)
+
+[Character](#char)
+
+[Vectors](#vec)
+
+[Matrices](#mat)
+
+
+We will know explore how to input data and manipulate data in R for our own computational purposes. 
+
+## <a name = "varas"><a/>Variable assingment
+
+We have already learned how to use R for basic mathematical operations. This can be further simplified by variable assingment, which essentially means giving a "name" to a value or set of values. For example: 
+
+```{r}
+x = 10    # assign a value to x
+y = 2     # assign a value to y
+
+x         # print x
+```
+
+We can see that  
+
+```{r}
+x + y 
+```
+
+Is equal to 
+
+```{r}
+10 + 2
+```
+
+### EXERCISE 1
+
+1. Assign these variable names *a,b,c,d* to the following values 5, 12.55, 30, 90.74
+
+2. Use R to calculate the following operations
+
+- a + d
+- (c-b) * c
+- (a^3) + d/ (b*c) 
+
+***
+
+ 
+## <a name = "datatype"><a/> Data types
+
+There are several data types that are commonly used in R. We will try to understand the differences among them and how this is translated by R. 
+
+
+
+## <a name = "numint"><a/> Numeric & integer variables
+
+R understands *numerics* as numbers with decimals. For example: 
+
+```{r}
+x = 12.5  # assign x a decimal value
+
+x         # print the value of x
+
+class(x)  # print class name of x
+```
+
+When using the class() function, we can observe that *x* is indeed a numeric type variable. However, if we were to type in a non-decimal value such as: 
+
+```{r}
+y = 10  # assign y a non-decimal value
+
+y       # print y
+
+class(y)
+```
+
+We see that *y* is also a numeric. This is because numeric is the default computational variable. Which means that even though we assign *y* the non-decimal value of *10*, R understands this as *10.0*.
+
+Non-decimal variables are called *integers*. We can create integer variables by using the as.integer() function.
+
+```{r}
+y = as.integer(10)  # create integer value
+
+y                   # print y
+
+class(y)            # print class name of y
+```
+
+We can also use this function to coerce a numeric variable into an integer. 
+
+```{r}
+k = as.integer(10.23)
+
+k  # print the value of k
+```
+
+Note that R coerces numeric variables into integers by deleting any decimals or *rounding down*.
+
+### Exercise 2
+
+1. Create variables for the following values 55.55, 101, 3.14, 88 
+2. Retrieve the class type for the last two 
+3. Coerce the first two variables into integers
+
+***
+
+
+
+## <a name = "char"><a/> Character
+
+These are string (or letter) values. When we assign character values we must use apostrophes to enclose the string.
+
+```{r}
+name = "Bond" # assign string value
+
+name          # print name value
+
+class(name)   # print class name
+```
+
+
+We can also coerce numeric variables to character by using the as.character() function.
+
+```{r}
+a = as.character(12.5)
+
+a
+
+class(a)
+```
+
+Note that once you coerce a numeric variable to a character, it can no longer be used for mathematical operations. 
+
+### Excercise 3
+
+1. Create variables for your first and last name, print these values.
+2. Coerce the following numbers to characters : 6.18, 93, 34.5
+
+***
+
+##<a name = "vec"><a/> Vectors
+
+Vectors are a sequence of elements of the same class. The vector class will be the same as the class of component elements. 
+
+**Creating vectors:** numeric vectors can be created as follows 
+
+```{r}
+v1 = c(2,4,6)  # Create vector
+
+v1             # print v1
+
+class(v1)      # print vector class name
+```
+
+Note that the *c* lying outside the parenthesis is an R function that *combines* elements. 
+
+If we wish to create a numeric vector with a sequence of continuous numbers (e.g. from 1 to 10), it is not necesary to type in every single number within the sequence. You can just indicate the first and last number in the sequence like so:
+
+```{r}
+v2 = c(1:10)  # Create a vector with values 1-10
+
+v2            # print v2
+```
+
+We can also create character vectors:
+
+```{r}
+v3 = c("a", "b", "c") # Create vector
+
+v3                    # print v3
+
+class(v3)             # print vector class name
+```
+
+Furthermore, we can use the length() function to know how may components are within a vector:
+
+```{r}
+v3          # We see a list of three elements
+
+length(v3)  # Indeed there are three elements in this vector
+```
+
+### Exercise 4
+
+1. Create the following vectors and determine their lengths:
+
+a = [1,3,5,7]
+
+b = [0,8,2,4]
+
+c = ["i", "j", "k"]
+
+d= ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+
+
+**Combining vectors:** Two or more vectors can be combined to form a single larger vector. 
+
+```{r}
+a = c(1,2,3)  # Create two vectors with 3 elements each
+b = c(4,5,6)
+
+c= c(a,b)    # Combine a and b
+
+c            # Print c, a longer vector with 6 elements
+```
+
+Vectors can be combined despite being from different classes.
+
+```{r}
+a = c(1,2,3)        # Create a numeric vector
+b = c("a","b","c")  # Create a character vector
+
+c = c(a,b)          # Combine both vectors
+
+c                   # Print c
+
+class(c)            # Print class name for c
+```
+
+Note that the numeric values in the vector *a* have been coerced as characters in *c*. Because elements in a vector must necessarily be of the same class.
+
+## Excercise 5
+
+Combine the vectors from the previous excercise as follows:
+
+1. a,d
+2. d,b,c
+3. d,a,b
+4. b,d,c,a
+
+**Vector operations:** Arithmetic operations with vectors are carried out on a member-to-member basis. This means that if you add two vectors, the first element of onevector will be added to the first element of the other, and so on.
+
+```{r}
+a = c(1,2,3)    # Create two numeric vectors with same number of elements
+b = c(4,5,6)
+
+c = a + b       # Add values of both vectors
+
+c               # Print values of new "added" vector
+```
+
+This is the same for any other arithmetic operation
+
+```{r}
+b - a
+
+a * b
+
+b / a
+```
+
+We can also multiply all the values in one vector by a scalar value:
+
+```{r}
+2*a
+
+1/3*b
+```
+
+**Careful!** When vectors are NOT the same length, the values of the shorter vector are "recycled". This means that the values of the shorter vector are reused to match the values of the longer vector. For example: 
+
+```{r}
+s = c(10, 100, 1000)             # Shorter vector with three elements
+l = c(5, 10, 15, 20, 25, 30, 35) # Longer vector with seven elements
+
+s + l
+```
+
+### Excercise 6 
+
+
+Having the following vectors a = [6,8,10] ; b = [45,60,90] ; c = [13,76,89,22]; d = [4,56,30,2] 
+
+1. b/(3*a)
+2. c - d 
+3. (d + c)/2*a
+
+***
+
+## <a name = "mat"><a/> Matrices
+
+Like vectors, matrices are also arrays of values. But instead of being linear, they are arranged in a rectangular format with *m* rows and *n* columns. We will construct a matrix *A* with 2 rows and 3 columns: 
+
+```{r}
+A = matrix(
+  c(1,2,3,4,5,6),   # elements in the matrix
+  nrow = 2,         # number of rows
+  ncol = 3) 
+
+A                   # print A
+```
+
+
+
+
+
