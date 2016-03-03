@@ -1,0 +1,56 @@
+---
+title: "Read spss files"
+author: "EcoHealth Alliance"
+date: "March 2, 2016"
+output: html_document
+---
+
+<img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
+
+### Method 1 (recommended)
+
+This is the most straightforward and easiest way to read SPSS files into R. 
+
+**Step 1:** Load the *foreign* package
+
+```{r}
+library(foreign) # load foreign R package
+```
+
+**Step 2:** Now we proceed to upload the SPSS file with read.spss()
+
+```{r eval = FALSE}
+data = read.spss(file.choose(), to.data.frame = TRUE)
+```
+
+Voila! you're all set. 
+
+Note that setting to.data.frame as TRUE is what actually allows R to treat our data as an R dataframe. 
+
+### Method 2
+
+There might be cases in which method 1 does not work. In that case do not despair, there is another way to load your SPSS files onto R though it may be a little more complicated.
+
+**Step 1:** First we need to install the *mesmic* package (if you have not done so already) and load it. 
+
+```{r eval = FALSE}
+
+install.packages("memisc")
+
+library(memisc)
+```
+
+**Step 2:** Then we read the file as an R data set
+
+```{r eval = FALSE}
+
+data= as.data.set(spss.system.file(file.choose()))
+```
+
+**Step 3:** Transform the data set object into an R dataframe
+
+```{r eval = FALSE}
+data = as.data.frame(data)
+```
+
+You should now be able to work with your SPSS dataframe on R.
