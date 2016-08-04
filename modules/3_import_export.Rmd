@@ -7,9 +7,22 @@ output: html_document
 
 <img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
 
+## Contents
+
+[CSV files](#csv)
+
+[TXT files](#txt)
+
+[SPSS](#spss)
+
+[Stata](#stata)
+
+[SAS](#sas)
+
+
 We might want to import data stored in other formats (e.g. CSV, SAS, Excel) for analysis in R. 
 
-### CSV files 
+### <a name = "csv"><a/>CSV files 
 To import csv files we can use the *read.csv*() function.
 
 ``` {r}
@@ -19,7 +32,7 @@ Note that ```header = TRUE``` is indicating that the first row of the dataframe 
 
 The *sep* parameter indicates the delimiter that should be considered when separating your data into columns. Since this is a **Comma separated value** file, the delimter we set ```sep = "," ```.
 
-### TXT files
+### <a name = "txt"><a/>TXT files
 
 Flat text files can be imported into R using *read.table*() 
 
@@ -28,7 +41,7 @@ data = read.table("MyData.txt, header = TRUE, sep = "\t")
 ```
 *read.table*() is a generalized version of *read.csv*() and can also be used to import CSV files. In this case data was tabulated so we set ```sep = "\t"``` as the delimiter. 
 
-### SPSS 
+### <a name = "spss"><a/>SPSS 
 R can import SPSS data sets with the *read.spss*() function from the *foreign* package. 
 
 ```{r}
@@ -47,13 +60,13 @@ data = spss.get("MyData.sav", use.value.label = TRUE)
 ```
 Keep in midne that *foreign* is a defaultlibrary to R, *Hmisc* must be installed before loading.
 
-### Stata
+### <a name = "stata"><a/>Stata
 
 To import Stata files we will also use the *foreign* package and its *read.dta*() function.
 ```{r} 
 data = read.dta("MyData.dta")
 ```
-### SAS
+###<a name = "sas"><a/> SAS
 
 There are different ways in which you can import SAS files into R, however the most convinient is to export your SAS dataset into CSV and then import it using the *read.csv*() function as mentioned previously. 
 
