@@ -1,5 +1,5 @@
 ---
-title: "Excercises | Data types"
+title: "Exercises | Data types"
 theme : united
 author: "EcoHealth Alliance"
 output: html_document
