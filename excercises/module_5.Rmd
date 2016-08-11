@@ -1,0 +1,11 @@
+---
+title: "Excercises | Descriptive Statistics"
+theme : united
+author: "EcoHealth Alliance"
+output: html_document
+highlight: tango
+---
+
+### Frequency distribution
+
+1. 
