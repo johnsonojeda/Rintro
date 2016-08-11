@@ -14,6 +14,8 @@ output: html_document
 
 [TXT files](#itxt)
 
+[Excel spreadsheet](#ixls)
+
 [SPSS](#ispss)
 
 [Stata](#istata)
@@ -24,6 +26,8 @@ output: html_document
 [CSV files](#ecsv)
 
 [TXT files](#etxt)
+
+[Excel spreadsheet](#exls)
 
 [SPSS](#espss)
 
@@ -52,6 +56,21 @@ Flat text files can be imported into R using *read.table*()
 data = read.table("MyData.txt, header = TRUE, sep = "\t")
 ```
 *read.table*() is a generalized version of *read.csv*() and can also be used to import CSV files. In this case data was tabulated so we set ```sep = "\t"``` as the delimiter. 
+
+### <a name = "ixls"><a/>Excel spreadsheet 
+
+We must first load the *xlsx* library 
+
+```
+library(xlsx)
+read.xlsx("MyData.xlsx", sheetIndex = 1, header = TRUE)
+```
+The ```sheetIndex = 1``` parameter is indicating that the first sheet of the workbook is to be imported as a dataframe. If you wish to load information from another sheet you may either indicate its index or alternatively its name.
+
+```
+read.xlsx("MyData.xlsx", sheetName = "Sheet2", header = TRUE)
+```
+The *header* parameter indicates whether the first row of the dataframes contains variable names/labels (TRUE) or not (FALSE). 
 
 ### <a name = "ispss"><a/>SPSS 
 R can import SPSS data sets with the *read.spss*() function from the *foreign* package. 
@@ -107,6 +126,15 @@ Exporting to a generic txt file is similar to exporting csv files. In this case 
 write.table(data, file = "MyData.txt", sep = "\t")
 ```
 Note that we have set ```sep = "\t"``` and thus have created a tabulated file. We could have created a csv file by setting the *sep* parameter to ",". 
+
+### <a name = "exls"><a/>Excel spreadsheet 
+
+To export dataframes to excel spreadsheets we must load the *xlsx* package.
+
+```
+library(xlsx)
+write.xlsx(data, "MyData.xlsx")
+```
 
 ### <a name = "ispss"><a/>SPSS
 As with importing, the *foreign* library is necessary to export SPSS file via its *write.foreign*() function. 
