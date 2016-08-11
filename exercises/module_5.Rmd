@@ -1,5 +1,5 @@
 ---
-title: "Excercises | Descriptive Statistics"
+title: "Exercises | Descriptive Statistics"
 theme : united
 author: "EcoHealth Alliance"
 output: html_document
