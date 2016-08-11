@@ -1,0 +1,34 @@
+---
+title: "Excercises | Manipulating data"
+theme : united
+author: "EcoHealth Alliance"
+output: html_document
+highlight: tango
+---
+
+### Data structure
+
+1. Check the structure of the *soil* dataframe
+2. What variable class does *Layer* belong to? 
+4. How many levels does *Forest Type* have? What are they?
+
+### Drop/Add columns
+
+1. Create a new dataframe (DF1) considering only columns 2-5 in *soil*
+2. Create an ID.Num vector with as many elements as rows in the new dataframe
+3. Attach ID.Num to the new dataframe (DF1)
+
+### Change column names
+
+1. Change the following column names in the *soil* dataframe as indicated:
+- Org_Matter to OM
+- Mic_BiomassC to C_biomass
+- Mic_BiomassN to N_biomass
+
+### Subsetting
+
+1. Create a new dataframe (degrade) by subsetting the *soil* dataframe to all *Forest_Type* = **Degraded** 
+2. Check the structure of *degrade*. How many factors are in Forest_Type? What must be done to correct this? 
+3. Create a new dataframe (acidic) by subsetting *soil* with all *pH* lower than 4.
+4. How many observations does *acidic* have? 
+
