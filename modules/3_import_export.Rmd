@@ -78,7 +78,7 @@ R can import SPSS data sets with the *read.spss*() function from the *foreign* p
 
 ```{r}
 # Load the foreign package
-librar(foreign)
+library(foreign)
 data = read.spss("MyData.sav", use.value.label = TRUE, to.data.frame = TRUE)
 ```
 ```use.value.label = TRUE``` converts all variables with labels in SPSS into factors in R, while ```to.data.frame = TRUE``` converts the data into an R dataframe. 
