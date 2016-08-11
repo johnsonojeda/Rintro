@@ -81,74 +81,52 @@ mtcars["Mazda RX4 Wag", "disp"]
 
 ***
 
-##<a name = "load"><a/> Loading dataframes
-
-However, most of the time we will probably work with an existing data, either generated at the lab, gathered on the field or downloaded from a publicly available database. 
-
-We are able to load  these data files on the R interface from our directory. We strongly recommend the use of flat text files (e.g. csv) rather than spreadsheets to store data since this makes loading and manipulating in R easier.  
-
-To load an existing file we can use the read.csv() function and specifying the file path. For example, to load the *movies.csv* file that is in your *data* folder:
-
-```{r}
-movies= read.csv(file = paste(getwd(), "data/movies.csv", sep= "/"), sep = ",", header = T )   # load the .csv file 
-
-head(movies)              # print the first six rows of the table
-```
-
-We have now loaded our dataframe and can see the first 6 rows containing data. 
-
-## EXERCISE 2
-
-1. Load the *tv_show.csv* file in your doc folder, then print the first six rows of your data.
-
-***
-
 ## <a name = "drop"><a/> Drop or add columns
 
 More often than not, dataframes are not structured in a way that is most practical for our analyses. Handling large dataframes may be complicated, data might lack information that we need, etc. We are able to perform several manipulations to dataframes to make handling data more convenient. 
 
 **Dropping columns:** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable. 
 
-For example, in our *movies* dataframe the first column **X** is a number for each row, which doesn't provide any relevant information.  We can modify the dataframe by specifying columns we wish to retain:
+We can modify the dataframe by specifying columns we wish to retain:
 
 ```{r}
 
-movies2 = movies[,2:10] # Create new dataframe with columns 2-10 only
+iris.drop = iris[,2:5] # Create new dataframe with columns 2-10 only
 
-head(movies2)
+head(iris.drop)
 ```
 
 Another way to do this is by specifying which column is to be dropped preceded by the *minus* (-) sign as follows:
 
 ```{r}
 
-movies2 = movies[,-1] # New dataframe without the first column 
+iris.drop = iris[,-1] # New dataframe without the first column 
 
-names(movies2)        # Print column names of the new dataframe
+names(iris.drop)        # Print column names of the new dataframe
 ```
 
 **Adding columns** : Other times we might want to add information to a dataframe. This is done with the *cbind* function, as with vectors or matrices. 
 
-Let's assume we wish to add the **X** column to the *movies2* dataframe:
+Let's assume we wish to add an ID number for each row in the dataframe:
 
 ```{r}
 
-X = movies$X                # Create a vector with all the values of X
+ID = 1:nrow(iris)           # Create a vector with as many elements as there rows in the dataframe
 
-names(movies2)              # Column names before adding X
+names(iris)                 # Check column names before adding X
 
-movies2 = cbind(X, movies2) # Add X column
+iris.add = cbind(ID, iris)  # Add ID column
 
-names(movies2)             # Column names after adding X
+names(iris.add)             # Column names after adding ID
 ```
 
 Keep in mind that the order in which you enter the elements in the *cbind* function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column. 
 
 ###EXCERCISE 3
 
-1. Drop the following columns from your dataframe : X, country, airs_time
+1. Drop the following columns from the iris dataframe : Sepal.Width, Petal.Width
 
-2. Add country and airs_time back in the dataframe (remember to create vectors for these columns before dropping them)
+2. Add an column with ID number to the mtcars dataframe
 
 ***
 
@@ -158,28 +136,15 @@ We can take a quick glimpse of our dataframe by using str().
 
 ```{r}
 
-str(movies)
+str(iris)
 ```
 
 This will let us visualize names, data type and first elements of each column.  
 
-We can easily change the class of a specific column to facilitate data manipulation. For example, **title** is currently a *factor*. Factors are useful when you have a limited set of options (levels) to choose from (e.g. male or female). Since movie titles may have an infinite amount of names, it is more appropriate to classify them as *characters*.
-
-We can coerce this column into character and verify the class change in the same way as you would do with vectors.
-
-```{r}
-
-movies$title = as.character(movies$title)
-
-class(movies$title)
-
-```
 
 ### EXCERCISE 4
 
 1. Summarize your dataframe.
-
-2. Change the **title** and **network** column classes to the most appropriate one for this type of data. Why do you consider this class to be better?
 
 ***
 
@@ -188,69 +153,79 @@ class(movies$title)
 Column and row names can be changed by the colnames() and rownames() functions respectively.
 
 ```{r}
-movies3 = head(movies)        # New dataframe with only 6 rows
 
-names(movies3)
+iris.head = head(iris)        # New data frame with only first 6 rows of iris
 
-colnames(movies3) = c("ID", "Title", "Year", "Released", "Runtime", "Rating", "Votes", "Language", "Genres", "Certification")             # Change column names
 
-rownames(movies3) = c("MOV1", "MOV2", "MOV3", "MOV4", "MOV5", "MOV6") # Change row names
+colnames(iris.head) = c("sep_len", "sep_wid", "pet_len", "pet_wid", "spp")    # Change column names
 
-head(movies3)
+rownames(iris.head) = c("ID1", "ID2", "ID3", "ID4", "ID5", "ID6") # Change row names
+
+iris.head #print dataframe
 ```
 
 You can also change the name of a particular column by specifying its number
 
 ```{r}
-colnames(movies3)[8]  = "Lang" # Specifiy the number of the column being renamed
+colnames(iris.head)[2]  = "SepalWidth" # Specifiy the number of the column being renamed
 
-names(movies3)[8]              # Print new column name
+names(iris.head)              # Print new column names
 ```
 
 ***
 
 ## <a name = "subset"><a/>Subsetting the dataframe
 
-There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in action movies.
+There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in flowers with petals longer than 4mm. We can do this by using mathematical operators
 
 ```{r}
 
-action = movies[movies$genres == "action",]  # Get all rows with genres equal to action
+long_petal; = iris[iris$Petal.Length > 4,]  # Get all rows with petals longer than 4
                                              # The comma is important here
 
-head(action)
+str(petal)
 
 ```
 
-Or we might want to know which movies are shorter than 100 minutues. We can do this by using mathematical operators
+Or we might be interested in a specific species
 
 ```{r}
 
-short = movies[movies$runtime < 100,]   # Get all rows with runtime under 100 
+setosa = iris[iris$Species == "setosa",]   # Get all rows with Species = Setosa 
                                         # The comma is important here
 
-head(short)                             # Print first values of the dataframe
+head(setosa)                             # Print first values of the dataframe
 ```
 
+However if we use *str*() we will notice that the other levels for species have been retained. This happens because Species is a *factor*. 
+
+```{r}
+str(setosa)
+```
+To succesfully subset dataframes by factors we must use *drop.levels*(). 
+
+```{r}
+setosa = droplevels(iris[iris$Species == "setosa",])
+```
 
 Furthermore, we can exclude rows with certain values by using logical operators
 
 ```{r}
 
-french = movies[movies$lang != "en",] # Get all rows with language different from English
-                                      # != means different than
-head(french)
+other.spp = drop.levels(iris[iris$Species != "setosa",]) # Get all rows with species different from setosa
+                                            # != means different than
+str(other.spp)
 ```
 
 ### EXCERCISE
 
-From your tv shows data frame create different subsets for:
+Using the mtcars dataframe create different subsets for:
 
-1. All shows that air on Thursday
+1. All cars with  4 cylinders
 
-2. All shows that are longer than 50 minutes
+2. Cars with more than 25 miles per galon (mpg)
 
-3. All shows except those that appear on HBO
+3. All gears except 3
 
 
 
