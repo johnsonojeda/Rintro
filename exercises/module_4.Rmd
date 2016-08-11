@@ -1,5 +1,5 @@
 ---
-title: "Excercises | Manipulating data"
+title: "Exercises | Manipulating data"
 theme : united
 author: "EcoHealth Alliance"
 output: html_document
