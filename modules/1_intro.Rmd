@@ -191,6 +191,8 @@ You are able to change your working directory through the RStudio Interface by:
 
 A file browser window should open and you may choose the appropriate folder. 
 
+You can also check what is currently within the directory by using ```dir()```.
+
 ### Exercise 4
 
 1. Create a folder called *R_wkshp* under **Documents**
@@ -211,7 +213,7 @@ specific computations require that you download additional *packages*.
 library()
 ```
 
-And a list of packages should appear in the *script* window.
+And a list of packages should appear in the *console* window.
 
 **Installing Packages:** If we wish to install a package, we can click on the **Install** button on the **Package* tab and type in the 
 name(s) or the package(s) we need. 
