@@ -1,0 +1,41 @@
+---
+title: "Excercises | Data types"
+theme : united
+author: "EcoHealth Alliance"
+output: html_document
+highlight: tango
+---
+
+### Variable assignment
+
+1. Assign the following variable names *a,b,c,d* to these values respectively *25, 12.54, 90, 2.75 *
+
+2. Use R to calculate:
+- a * b
+- b - (c/a)
+- (c/a)^2 - (b*a) + a 
+
+### Numerics, integers & characters
+
+1. Assign the following variable names *e, f, g"  to these values respectively *"forest", "cropland", "savanna"*
+2. Identify the class for *a, d, f*
+3. Coerce *b* into an integer and retrieve its new value
+4. Coerce *c* into a character. Can *c* still be used as a number for computation? 
+5. Coerce *e* into numeric. Did this work? Why?
+
+### Vectors
+
+1. Create a vector (V1)  containing variables *a-d* and another vector (V2) with variables *e-g*
+2. What class is V1? And V2?
+3. Create a third vector (V3) merging V1 and V2? Retrieve its class? What happened?
+
+### Vector Operations
+4. Create vectors V4 containing these values *10, 20, 30, 40* and V5 containing *5, 10, 15, 20, 25* and carry out the following operations:
+- V1 + V4
+- V4/2 - V1*2
+- V4 + V5  What happened here? Why? 
+
+### Matrices & dataframes
+1. Create a matrix (M1) with 4 columns and 2 rows merging V1 and V4 
+2. Create a matrix (M2) with 2 columns and 4 rows merging V1 and V4
+3. Coerce M1 into a dataframe 
