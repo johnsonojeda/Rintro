@@ -1,0 +1,45 @@
+---
+title: "Excercises| Module 1"
+theme : united
+author: "EcoHealth Alliance"
+output: html_document
+highlight: tango
+---
+
+### Basic Operations
+
+Use R to calculate
+
+1. 300 + 12 + 3
+2. 34 * 5.2
+3. sqrt(144) * 2^2
+4. 11 * (10 + 1)/2
+5. 11 * 10 + 1 /2 
+6. Are 4 and 5 equivalent? Why or why not? 
+7. log(100)
+8. log10(100)
+9. Are 7 and 8 equivalent? Why or why not?
+
+### Working directory
+
+1. Get your current working directory
+2. What elements are within your current working directory? 
+3. Change your working directory to "~/Rwkshp/output"
+4. What elements are inside your new working directory? 
+5. Change your working directory back to the original wd. 
+
+### Libraries & Packages
+1. Check if you have the *tools, foreign, base* packages installed
+2. Install those packages that are not in your library with the *install.packages*() function
+3. Load *tools* with *library*() function
+4. Load *foreign* using the graphic interface 
+
+### Getting Help
+
+1. Ask R for help for the following function *cbind, class, mean*
+2. What does *class*() do? 
+3. What do you need to execute *cbind*()? 
+4. What does the *na.rm* parameter indicate in the *mean*() function? 
+
+
+
