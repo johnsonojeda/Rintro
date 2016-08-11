@@ -1,5 +1,5 @@
 ---
-title: "Excercises| Module 1"
+title: "Exercises| Module 1"
 theme : united
 author: "EcoHealth Alliance"
 output: html_document
