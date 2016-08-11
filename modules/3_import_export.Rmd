@@ -8,7 +8,7 @@ output: html_document
 <img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
 
 ## Contents
-**[Importing]**(#imp)
+[**Importing**](#imp)
 
 [CSV files](#icsv)
 
@@ -20,7 +20,7 @@ output: html_document
 
 [SAS](#isas)
 
-**[Exporting]**(#exp)
+[**Exporting**](#exp)
 [CSV files](#ecsv)
 
 [TXT files](#etxt)
