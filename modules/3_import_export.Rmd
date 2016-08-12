@@ -18,9 +18,9 @@ output: html_document
 
 [SPSS](#ispss)
 
-[Stata](#istata)
-
 [SAS](#isas)
+
+[Stata](#istata)
 
 [**Exporting**](#exp)
 
@@ -32,9 +32,9 @@ output: html_document
 
 [SPSS](#espss)
 
-[Stata](#estata)
-
 [SAS](#esas)
+
+[Stata](#estata)
 
 ## <a name = "imp"><a/>Importing
 We might want to import data stored in other formats (e.g. CSV, SAS, Excel) for analysis in R. 
@@ -92,12 +92,6 @@ data = spss.get("MyData.sav", use.value.label = TRUE)
 ```
 Keep in midne that *foreign* is a default library to R, *Hmisc* must be installed before loading.
 
-### <a name = "istata"><a/>Stata
-
-To import Stata files we will also use the *foreign* package and its *read.dta*() function.
-```{r} 
-data = read.dta("MyData.dta")
-```
 ###<a name = "isas"><a/> SAS
 
 There are different ways in which you can import SAS files into R, however the most convinient is to export your SAS dataset into CSV and then import it using the *read.csv*() function as mentioned previously. 
@@ -106,6 +100,12 @@ Another way you can import your SAS data is by using the *sasxport.get*() functi
 
 ```{r}
 data = sasxport.get("MyData.xpt")
+```
+### <a name = "istata"><a/>Stata
+
+To import Stata files we will also use the *foreign* package and its *read.dta*() function.
+```{r} 
+data = read.dta("MyData.dta")
 ```
 ***
 ##<a name = "exp"><a/> Exporting
@@ -142,17 +142,17 @@ As with importing, the *foreign* library is necessary to export SPSS file via it
 ```
 write.foreign(data, datafile = "MyData.txt", codefile = "MyData.sps", package = "SPSS")
 ```
+### <a name = "isas"><a/>SAS
+The *write.foreign*() function from *foreign* can also be used to export dataframes in SAS format in a similar way to SPSS files.
+````
+write.foreign(data, datafile = "MyData.txt", codefile = "MyData.sas", package = "SAS")
+```
 
 ### <a name = "istata"><a/>Stata
 The *foreign* package is also required to export Stata files. *write.dta*() can be used to export dataframes in Stata binary format
 
 ```
 write.dta(data, "MyData.dta")
-```
-### <a name = "isas"><a/>SAS
-The *write.foreign*() function from *foreign* can also be used to export dataframes in SAS format in a similar way to SPSS files.
-````
-write.foreign(data, datafile = "MyData.txt", codefile = "MyData.sas", package = "SAS")
 ```
 
 
