@@ -15,8 +15,8 @@ highlight: tango
 ### Drop/Add columns
 
 1. Create a new dataframe (DF1) considering only columns 2-5 in *soil*
-2. Create an ID.Num vector with as many elements as rows in the new dataframe
-3. Attach ID.Num to the new dataframe (DF1)
+2. Create a *Site* (select andy location you like) vector with as many elements as rows in the new dataframe. **Hint** : use the *rep*() function. 
+3. Attach *Site* to the new dataframe (DF1)
 
 ### Change column names
 
@@ -32,3 +32,6 @@ highlight: tango
 3. Create a new dataframe (acidic) by subsetting *soil* with all *pH* lower than 4.
 4. How many observations does *acidic* have? 
 
+### Operations
+1. Using the *cancer* dataframe, create a new vector (Cdiff) by calculating the total difference in cist numbers(inital to week 4). 
+2. Append *Cdiff* to your dataframe. **Hint** *cbind*() 
