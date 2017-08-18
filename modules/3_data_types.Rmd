@@ -1,0 +1,126 @@
+---
+title: "Introduction to R | Data"
+theme : united
+author: "EcoHealth Alliance"
+output: html_document
+highlight: tango
+---
+<img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
+
+## Contents
+
+[Dataframe structure](#str)
+
+[Numerics & Integers](#numint)
+
+[Factors & Characters](#char)
+
+[Vectors](#vec)
+
+## <a name = "str"><a/> Dataframe structure
+
+Now that we know how to import dataframes from other sources, we can check
+the structure or data types within it.
+
+We will start by loading the *UsMortality* dataset built into the *lattice*
+package.
+
+```{r}
+library(lattice)
+
+# load USMortality dataframe
+data(USMortality)
+
+#Visualize the structure of the dataframe using the str() function
+
+str(USMortality)
+```
+
+We can now see each component vector of the dataframe separately, the first elements within each vector and the data category to which the vector belongs to. In this case we have 2 types of data Factors (Status, Sex, and Cause) and Numerics (Rate and Standard Error). 
+
+###Exercise 1
+
+1. Load the built-in *iris* dataframe using the ```data()``` function.
+2. Check the structure of this dataframe
+3. What types of variables does it contain? 
+
+We will now talk about the different types of data R deals with
+
+***
+## <a name = "numint"><a/> Numeric & integer variables
+
+R understands *numerics* as numbers with decimals. For example, let's extract the *SE* vector from the USMortality. 
+
+```{r}
+SE = USMortality$SE
+
+class(SE) #The class function tells us what data type we are dealing with
+
+```
+
+When using the ```class()``` function, we can observe that *SE* is indeed a numeric type variable. However, what happens when we do the same with the *Rate* vector?
+
+```{r}
+Rate = USMortality$Rate
+
+print(Rate)
+class(Rate)
+```
+
+We see that *Rate* is also classified as numeric. This is because numeric is the default computational variable. Which means that even though the first element within the *Rate* vector is the non-decimal value of *210*, R interprets it as  *210.0*.
+
+Non-decimal variables are called *integers*. We can create integer variables by using the ```as.integer()``` function.
+
+```{r}
+Rate = as.integer(Rate)  # transform from numeric to integer
+
+class(Rate)            # Get data of vector
+```
+
+We can also use this function to coerce a numeric variable into an integer. 
+
+```{r}
+SE = as.integer(SE)
+
+SE  # print the new values of SE
+```
+
+Note that R coerces numeric variables into integers by deleting any decimals or *rounding down*.
+
+### Exercise 2
+
+1. Extract the *Petal.Length* column into an independent vector called *PetalLen*
+2. Determine what data type this new vector is using the ```class()``` function.
+3. Corece this vector into an integer
+
+***
+
+## <a name = "char"><a/> Factors & Characters
+
+Factors are categorical variables, meaning that they can only take a limited number of differnt values. For example, in the *Sex* vector of the *USMortality * dataframe, we only observe 2 possible values Female and Male. 
+
+```{r}
+
+class(USMortality$Sex)
+```
+
+Though dealing with a limited number of categories is useful, when we have to many it may be unmanageable. In that case we may prefer working with character variables. These are string (or letter) values, however they are not restricted to a limited number of categories. Like factors, Character strings are also enclosed in quotations (```" "```).
+
+We can easily convert factors into characters with the ```as.character()``` function. Let's do it for the *Cause* column within the *USMortality* dataframe:
+
+```{r}
+USMortality$Cause = as.character(USMortality$Cause)
+
+class(USMortality$Cause)
+```
+Note that by using the *$* operator we are not creating a new vector as we had done previously, rather we are choosing the Column (Cause) within the dataframe (USMortality) and applying the function to that specific column in the dataframe. Such that:
+
+```{r}
+str(USMortality)
+```
+
+We can see that that the class for *Cause* has changed.
+
+### Excercise 3
+
+1. Transform the *Species* column into a character vector. 

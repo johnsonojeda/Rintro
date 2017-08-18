@@ -9,9 +9,8 @@ output: html_document
 
 ## Contents
 
-[Dataframes](#df)
 
-[Loading dataframes](#load)
+[More about dataframes](#df)
 
 [Drop or add columns](#drop)
 
@@ -24,60 +23,51 @@ output: html_document
 
 ## <a name = "df"><a/>Dataframes 
 
-Data can be stored in tables as dataframe objects. We can create dataframes by merging different vectors of the same length with the data.frame() function. 
+We have learned how to load dataframes and view the different types of data 
+structures within them. We will now learn how to explore and manipulate these
+dataframes.
+
+The first row in a dataframe is called the *header* and holds all  column (variable) names. 
+The first column of the dataframe usually consists of rownames. However, rownames aren't 
+always present in dataframes. All rows after the *header* are called *data rows*. 
+Each member of a row is called a *cell*. 
+
+We can find out how many rows and columns are in our dataframe.
 
 ```{r}
-numbers = c(1,2,3)                         # Create 3 vectors of equal length
+#Using the USMortality dataframe from the lattice package
+library(lattice)
+data("USMortality")
 
-letters = c("a", "b", "c")
+nrow(USMortality)    # Number of rows in mtcars
 
-logical = c(TRUE, TRUE, FALSE)
-
-df = data.frame(numbers, letters, logical) # Create data-frame
-
-df                                         # Print data-frame                     
+ncol(USMortality) # Number of columns in mtcars
 ```
 
-There are a few dataframes built-in to R that can be loaded by calling upon them. For example the *mtcars* dataset, containing automobile desing and performance information:
-
+Likewise, we can take a look at the first (head) and last (tail) elements of the dataframe.
 ```{r}
+head(USMortality) # First 6 elements
 
-head(mtcars)          # View first 6 rows of the dataframe
-```
-
-The first row in a dataframe is called the *header* and holds all  column (variable) names. The first column of the dataframe usually consists of rownames. However, rownames aren't always present in dataframes. All rows after the *header* are called *data rows*. Each member of a row is called a *cell*. 
-
-We can find out how many rows and columns are in our dataframe
-
-```{r}
-
-nrow(mtcars)    # Number of rows in mtcars
-
-ncol(mtcars) # Number of columns in mtcars
+tail(USMortality) # Last 6 elements
 ```
 
 We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.
 
 ```{r}
-mtcars[2,3]   # Value from second row and third column
+USMortality[2,3]   # Value from second row and third column
 ```
 
-This is also possible using column and row names 
+Additionally, we can find out how many elements are within a single column of the dataframe
 
 ```{r}
-
-mtcars["Mazda RX4 Wag", "disp"]
+length(USMortality$Cause)
 ```
 
 ### EXERCISE 1
 
-1. Create the following vectors and merge them to create a dataframe  
-- grade = [A, B, A, C, D, B] 
-- subject = [Science, Geography, Math, English, History, French]
-- credits  = [4,4,3,2,3,3]
-
-
-2. Determine the number of rows and columns in the dataframe.
+1. Load the in-buitl *iris* dataframe
+2. How many rows are in this dataframe? 
+3. Get the first 6 elements of the dataframe
 
 ***
 
@@ -91,18 +81,18 @@ We can modify the dataframe by specifying columns we wish to retain:
 
 ```{r}
 
-iris.drop = iris[,2:5] # Create new dataframe with columns 2-10 only
+mort.drop = USMortality[,3:5] # Create new dataframe with columns 3-5 only
 
-head(iris.drop)
+head(mort.drop)
 ```
 
 Another way to do this is by specifying which column is to be dropped preceded by the *minus* (-) sign as follows:
 
 ```{r}
 
-iris.drop = iris[,-1] # New dataframe without the first column 
+mort.drop = USMortality[,-1] # New dataframe without the first column 
 
-names(iris.drop)        # Print column names of the new dataframe
+names(mort.drop)        # Print column names of the new dataframe
 ```
 
 **Adding columns** : Other times we might want to add information to a dataframe. This is done with the *cbind* function, as with vectors or matrices. 
@@ -111,13 +101,13 @@ Let's assume we wish to add an ID number for each row in the dataframe:
 
 ```{r}
 
-ID = 1:nrow(iris)           # Create a vector with as many elements as there rows in the dataframe
+IDnumber = 1:nrow(USMortality)           # Create a vector with as many elements as there rows in the dataframe
 
-names(iris)                 # Check column names before adding X
+names(USMortality)                 # Check column names before adding IDnumber
 
-iris.add = cbind(ID, iris)  # Add ID column
+mort.add = cbind(IDnumber, USMortality)  # Add ID column
 
-names(iris.add)             # Column names after adding ID
+names(mort.add)             # Column names after adding IDnumber
 ```
 
 Keep in mind that the order in which you enter the elements in the *cbind* function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column. 
@@ -126,25 +116,29 @@ Keep in mind that the order in which you enter the elements in the *cbind* funct
 
 1. Drop the following columns from the iris dataframe : Sepal.Width, Petal.Width
 
-2. Add an column with ID number to the mtcars dataframe
+2. Add an column with IDnumber to the iris dataframe
 
 ***
 
 ## <a name = "dsum"><a/>Data summary 
 
-We can take a quick glimpse of our dataframe by using str(). 
+Something that could be quite useful to provide a better understanding of our data is to get
+a quick statistical summary of our dataframe. 
 
 ```{r}
 
-str(iris)
+summary(USMortality)
 ```
 
-This will let us visualize names, data type and first elements of each column.  
+The ```summary()``` function allows us to explore the number of counts and 
+labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)
 
 
 ### EXCERCISE 4
 
-1. Summarize your dataframe.
+1. Summarize the *iris* dataframe
+2. What is the maximum Petal lenght? 
+3. How setosa individuals are there? 
 
 ***
 
@@ -154,78 +148,79 @@ Column and row names can be changed by the colnames() and rownames() functions r
 
 ```{r}
 
-iris.head = head(iris)        # New data frame with only first 6 rows of iris
+mort.head = head(USMortality)  # New data frame with only first 6 rows
 
 
-colnames(iris.head) = c("sep_len", "sep_wid", "pet_len", "pet_wid", "spp")    # Change column names
+colnames(mort.head) = c("col1", "col2", "col3", "col4", "col5")    # Change column names
 
-rownames(iris.head) = c("ID1", "ID2", "ID3", "ID4", "ID5", "ID6") # Change row names
+rownames(mort.head) = c("ID1", "ID2", "ID3", "ID4", "ID5", "ID6") # Change row names
 
-iris.head #print dataframe
+mort.head #print dataframe
 ```
 
 You can also change the name of a particular column by specifying its number
 
 ```{r}
-colnames(iris.head)[2]  = "SepalWidth" # Specifiy the number of the column being renamed
+colnames(mort.head)[2]  = "NewColName" # Specifiy the number of the column being renamed
 
-names(iris.head)              # Print new column names
+names(mort.head)                       # Print new column names
 ```
 
 ***
 
 ## <a name = "subset"><a/>Subsetting the dataframe
 
-There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in flowers with petals longer than 4mm. We can do this by using mathematical operators
+There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in those entries where the *Rate* is larger than 50.
 
 ```{r}
 
-long_petal; = iris[iris$Petal.Length > 4,]  # Get all rows with petals longer than 4
-                                             # The comma is important here
+large_rate = USMortality[USMortality$Rate > 50,]  # Get all rows with rate greater than 50
+                                                  # The comma is important here
 
-str(petal)
+summary(large_rate)
 
 ```
 
-Or we might be interested in a specific species
+Or we might be interested only in Rural areas
 
 ```{r}
 
-setosa = iris[iris$Species == "setosa",]   # Get all rows with Species = Setosa 
-                                        # The comma is important here
+Rural = USMortality[USMortality$Status == "Rural",] # Get all rows with Status = Rural 
+                                                    # The comma is important here
 
-head(setosa)                             # Print first values of the dataframe
+head(Rural)                                         # Print first values of the dataframe
 ```
 
-However if we use *str*() we will notice that the other levels for species have been retained. This happens because Species is a *factor*. 
+However if we use *str*() we will notice that the other levels for statuses have been retained. This happens because Status is a *factor*. 
 
 ```{r}
-str(setosa)
+str(Rural)
 ```
-To succesfully subset dataframes by factors we must use *drop.levels*(). 
+To succesfully subset dataframes by factors we must use *droplevels*(). 
 
 ```{r}
-setosa = droplevels(iris[iris$Species == "setosa",])
+Rural = droplevels(USMortality[USMortality$Status == "Rural",]) #The comma is important
+str(Rural)
 ```
 
-Furthermore, we can exclude rows with certain values by using logical operators
+Furthermore, we can exclude rows with certain values by using logical operators. For example, we will retrieve all entries where Cause is not cancer.
 
 ```{r}
 
-other.spp = drop.levels(iris[iris$Species != "setosa",]) # Get all rows with species different from setosa
-                                            # != means different than
-str(other.spp)
+other.cause = droplevels(USMortality[USMortality$Cause != "Cancer",]) # Get all rows with Cause different from cancer
+                                                                      # != means different than
+summary(other.cause)
 ```
 
 ### EXCERCISE
 
-Using the mtcars dataframe create different subsets for:
+Using the *iris* dataframe create different subsets for:
 
-1. All cars with  4 cylinders
+1. All flowers with petals longer than 4mm
 
-2. Cars with more than 25 miles per galon (mpg)
+2. Flowers with petal widths smaller than 1mm
 
-3. All gears except 3
+3. All species except *virginica*
 
 
 
