@@ -22,21 +22,21 @@ highlight: tango
 Now that we know how to import dataframes from other sources, we can check
 the structure or data types within it.
 
-We will start by loading the *UsMortality* dataset built into the *lattice*
-package.
+We will start by loading the *cgd* (Chronic Granulotomous Disease data) dataset built into the *survival* package.
 
 ```{r}
-library(lattice)
+# First we need to load the package
+library(survival)
 
-# load USMortality dataframe
-data(USMortality)
+# Then load the cgd dataframe
+data("cgd") 
 
 #Visualize the structure of the dataframe using the str() function
 
-str(USMortality)
+str(cgd)
 ```
 
-We can now see each component vector of the dataframe separately, the first elements within each vector and the data category to which the vector belongs to. In this case we have 2 types of data Factors (Status, Sex, and Cause) and Numerics (Rate and Standard Error). 
+We can now see each component vector of the dataframe separately, the first elements within each vector and the data category to which the vector belongs to. In this case we have 4 types of data *integers* (e.g. id, age), *numerics* (e.g. height, weight), *factors* (e.g. treatment, sex) and *date*. 
 
 ###Exercise 1
 
@@ -49,43 +49,46 @@ We will now talk about the different types of data R deals with
 ***
 ## <a name = "numint"><a/> Numeric & integer variables
 
-R understands *numerics* as numbers with decimals. For example, let's extract the *SE* vector from the USMortality. 
+R understands *numerics* as numbers with decimals. For example, let's extract the *weight* vector from the *cgd* dataframe. 
 
 ```{r}
-SE = USMortality$SE
+weight = cgd$weight
 
-class(SE) #The class function tells us what data type we are dealing with
+class(weight) #The class function tells us what data type we are dealing with
 
 ```
 
-When using the ```class()``` function, we can observe that *SE* is indeed a numeric type variable. However, what happens when we do the same with the *Rate* vector?
+When using the ```class()``` function, we can observe that *weight* is indeed a numeric type variable. However, what happens when we do the same with the *age* vector?
 
 ```{r}
-Rate = USMortality$Rate
+age = cgd$age
 
-print(Rate)
-class(Rate)
+print(age)
+class(age)
 ```
 
-We see that *Rate* is also classified as numeric. This is because numeric is the default computational variable. Which means that even though the first element within the *Rate* vector is the non-decimal value of *210*, R interprets it as  *210.0*.
-
-Non-decimal variables are called *integers*. We can create integer variables by using the ```as.integer()``` function.
+We see that even though *age* is also a number, it is calssified as a *integer* variable. Non-decimal variables are called *integers*. We can transform these integer values into numeric (with decimals) by calling the ```as.numeric()``` function.
 
 ```{r}
-Rate = as.integer(Rate)  # transform from numeric to integer
+age_num = as.numeric(age)
 
-class(Rate)            # Get data of vector
+print(age_num)
+class(age_num)
 ```
 
-We can also use this function to coerce a numeric variable into an integer. 
+
+We can also coerce numeric values into integer variables by using the ```as.integer()``` function.
 
 ```{r}
-SE = as.integer(SE)
+weight_int = as.integer(weight)  # Transform from numeric to integer
 
-SE  # print the new values of SE
+class(weight_int)                # Get new integer vector
 ```
+
 
 Note that R coerces numeric variables into integers by deleting any decimals or *rounding down*.
+
+Keep in mind that the default for R is to interpret numbers as numerics. So when you import a dataframe from another source integer values will be assumed to be numeric, that is having decimal values. 
 
 ### Exercise 2
 
@@ -97,29 +100,29 @@ Note that R coerces numeric variables into integers by deleting any decimals or 
 
 ## <a name = "char"><a/> Factors & Characters
 
-Factors are categorical variables, meaning that they can only take a limited number of differnt values. For example, in the *Sex* vector of the *USMortality * dataframe, we only observe 2 possible values Female and Male. 
+Factors are categorical variables, meaning that they can only take a limited number of differnt values. For example, in the *sex* vector of the *cgd * dataframe, we only observe 2 possible values female and male. 
 
 ```{r}
 
-class(USMortality$Sex)
+class(cgd$sex)
 ```
 
 Though dealing with a limited number of categories is useful, when we have to many it may be unmanageable. In that case we may prefer working with character variables. These are string (or letter) values, however they are not restricted to a limited number of categories. Like factors, Character strings are also enclosed in quotations (```" "```).
 
-We can easily convert factors into characters with the ```as.character()``` function. Let's do it for the *Cause* column within the *USMortality* dataframe:
+We can easily convert factors into characters with the ```as.character()``` function. Let's do it for the *center* column within the *cgd* dataframe:
 
 ```{r}
-USMortality$Cause = as.character(USMortality$Cause)
+cgd$center = as.character(cgd$center)
 
-class(USMortality$Cause)
+class(cgd$center)
 ```
-Note that by using the *$* operator we are not creating a new vector as we had done previously, rather we are choosing the Column (Cause) within the dataframe (USMortality) and applying the function to that specific column in the dataframe. Such that:
+Note that by using the *$* operator we are not creating a new vector as we had done previously, rather we are choosing the Column (center) within the dataframe (cgd) and applying the function to that specific column in the dataframe. Such that:
 
 ```{r}
-str(USMortality)
+str(cgd)
 ```
 
-We can see that that the class for *Cause* has changed.
+We can see that that the class for *center* has changed.
 
 ### Excercise 3
 

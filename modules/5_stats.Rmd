@@ -12,27 +12,17 @@ output: html_document
 
 [Quantitative vs qualitative data](#qvq)
 
-[Frequency distribution: qualitative](#frequal)
+[Measures of central tendency](#cent)
 
-[Frequency distribution : quantitative](#frequant)
+[Measures of dispersion](#varmes)
 
-[Plotting frequency: qualitative](#barplot)
+[Frequency distributions](#freq)
 
-[Plotting frequency: quantitative](#hist)
+[Barplot](#bar)
 
-[Plotting frequency: qualitative](#barplot)
+[Histogram](#hist)
 
-[Numerical measures](#numes)
-
-[Quartiles](#quart)
-
-[Mean](#mean)
-
-[Median](#median)
-
-[Variance and standard deviation](#varsd)
-
-[Boxplots](#box)
+[Boxplot](#box)
 
 ##<a name = "qvq"><a/> Quantitative vs qualitative data
 
@@ -42,222 +32,161 @@ Data is *quantitative* if measurements can be represented numerically, in other 
 
 Furthermore, *quantitative* data can be either *continuous* if it can take any value within a range (e.g. height, weight) or *discrete* if it can only take specific values (e.g. age).
 
-*Qualitative* data on the other hand, refers to non-numerical, nominal data (e.g. eye color, yes-no answers).
+*Qualitative* data on the other hand, refers to non-numerical, nominal data (e.g. sex, yes-no answers).
 
 It is important to understand the differences between these types of data in order to properly choose the statistical analyses to be applied. For this reason we will first consider methods related to qualitative data and then will move on to methods for the analysis of quantitative data. 
 
-## Frequency distribution
 
-### <a name = "frequal"><a/>Qualitative Data 
+### <a name = "cent"><a/> Measures of central Tendency 
 
-Frequency distributions summarize occurence within a set of non-overlapping values. For discrete data we can use the table() function to obtain the frequency distribution. 
+As we saw in the previous section, we can get a general idea of the distribution of our data using the ```summary()``` function. 
 
 ```{r, echo = FALSE, cache.comments = TRUE}
 
-movies = read.csv(file = paste(getwd(),"data/movies.csv", sep = "/"), sep = ",", header= T)
+library(survival)
+data("cgd")
 
+summary(cgd)
 ```
+
+However, we notice that measures of central tendency (mean and median) are only given for quantitative variables. 
+
+We can also calculate these values for specific variables via the ```mean()``` and ```median()``` functions.
 
 ```{r}
 
-genres = movies$genres     # genres in our movie dataframe
+weight = cgd$weight           
 
-gen.freq = table(genres)   # get frequency distribution
+mean(weight)               # mean weight
 
-gen.freq                   # print frequency distribution of genres
-
-```
-
-We can then transform this into a column format using cbind().
-
-```{r}
-
-cbind(gen.freq)
-```
-
-We can also look at the proportional or relative frequency of data rather than absolute counts.
-
-```{r}
-
-gen.rel.freq = gen.freq/nrow(movies)   # Calculate relative frequency 
-
-cbind(gen.rel.freq)
+median(weight)             # median for weight
 
 ```
 
-### <a name = "frequant"><a/> Quantitative data
+We can also take a look at quartiles and percentlies. Quartiles divide our data into four equal parts and allow us to know the proportion of our data that falls under a certain value. The first or lower quartile cuts off the first 25% of the data, the second quartile (or median) cuts at 50%, and the upper (third) quartile at 75%.
 
-For quantitative data this is more challenging since measurements are continuous and may overlap. For this reason we must break the data into classes to determine frequency of data within these categories. For that we must:
+```{r} 
 
-1. Determine the range of our data 
+quantile(weight) # will show us the quartile distribution of our data
 
-```{r}
+quantile(weight, 0.95) # shows us the 95th percentile
 
-ratings = movies$rating    # create vector for ratings of movies
-
-range(ratings)             # range of our data
 ```
 
-It shows that our data ranges approximately from 6.74 to 9.30.
+### EXERCISE 1
 
-2. Break the data into even non-overlapping classes. Since we determined that our data ranges from [6.74, 9.30],  we can set the classes the range of [6.5, 9.5] split by 0.5 intervals.
+1. Upload the *iris* dataframe
+2. What is the mean value for Petal.Width? The median?
+3. Calculate the 5th and 95th percentile for Sepal.Length
 
-```{r}
+## <a name = "varmes"><a/> Measures of dispersion 
 
-breaks = seq(6.5, 9.5, by = 0.5)   # set break sequence by 0.5
-
-breaks
-```
-
-3. Fit the data into the intervals we created.
-
-```{r}
-
-ratings.cut = cut(ratings, breaks)  # cut our data according to predetermined breaks  
-```
-
-4. Finally, create the frequency table as we do with qualitative data
-
-```{r}
-
-ratings.freq = table(ratings.cut) # sort our data withing break classes
-
-cbind(ratings.freq)
-```
-
-As with qualitative data, we can determine the relative frequency.
-
-```{r}
-ratings.rel.freq = ratings.freq/nrow(movies) # relative frequency
-
-cbind(ratings.rel.freq)
-```
-
-
-### EXCERCISE 1
-
-Load the tv show dataframe and determine:
-
-1. Overall frequency distribution of days that shows are aired (airs_day)
-
-2. Relative frequency of networks in which shows are aired
-
-***
-
-## Plotting frequency
-
-###<a name = "barplot"><a/> Qualitative data
-
-Once we have created our frequency distribution tables we are able to graphically visualize this information using bar plots.
-
-```{r}
-
-barplot(gen.freq, main = "Movie Genres")  # plot frequency
-```
-
-However we notice that axis labels do not fit properly. We can change the graphic parameters to make our plot look better. 
-
-```{r}
-
-barplot (gen.freq, main = "Movie Genres", las =3, cex.names = 0.7) # change font size and position
-```
-
-### EXCERCISE 2
-
-Using the tv show dataframe, plot the frequency days in which shows are aired.
-
-###<a name = "hist"><a/> Quantitative data
-
-To plot quantitative data however, it is not necessary to construct a frequency table first. We can visualize frequency by creating a histogram using our data directly.
-
-```{r}
-
-hist(ratings, col = "gray")   # histogram of ratings
-```
-
-### EXCERCISE 3
-
-Using the tv show dataframe create a histrogram for aired episodes and year.
-
-***
- 
-## <a name = "numes"><a/>Numerical measures
-
-Even though frequency gives us an idea of how our data is distributed, there are several numerical measures commonly used in statistics that help us further understand the distribution of our data. We will now briefly explore quartiles, measures of central tendency and measures of variation.
-
-###<a name = "quart"><a/> Quartiles
-
-Quartiles divide our data into four equal parts and allow us to know the proportion of our data that falls under a certain value. The first or lower quartile cuts off the first 25% of the data, the second quartile (or median) cuts at 50%, and the upper (third) quartile at 75%.
-
-
-```{r}
-
-quantile(ratings)
-```
-
-
-We can also see how much the middle portion of our data spreads by calculating the *interquantile range*
-
-```{r}
-IQR(ratings)
-```
-
-### EXCERCISE 4
-
-Determine the quartiles and interquartile range for number of aired episodes in the tv show dataframe.
-
-###<a name = "mean"><a/> Mean
-
-The mean or arithmetic average represents the sum of all values of our data divided by the number of observations in our data. We can determine the mean 
-
-```{r}
-
-mean(ratings)
-```
-
-### <a name = "median"><a/>Median
-
-The median is a value that separates data in half. Meaning that half of the values in the data are higher than the median while the other half is lower. 
-
-```{r}
-
-median(ratings) 
-```
-
-Note that when our data follows a normal distribution, which just so happens to be the case with ratings, the mean and the median will be very similar.
-
-However, when data is skewed these will differ. This is because the mean is greatly affected by extreme values. 
-
-### <a name = "varsd"><a/>Variance and standard deviation
+To further understand the distribution of our data we need to know how spread out the data is. We can do this using measures of dispersion. 
 
 *Variance* is a measure of how much our data is dispersed around the mean. In other words, it is the average distances of our sample values from the mean. This helps us understand how much variation is there within our sample population. 
 
 ```{r}
-var(ratings)
+var(weight)
 ```
 
 *Standard deviation* is the square root of the variance. Many times it is prefered to represent variation since it usually yields more manageable values than the variance. However, both values are equally valid and may be used to asses variation within a particular population. 
 
 ```{r}
-sd(ratings)
+sd(weight)
 ```
 
-### EXCERCISE 5 
+### EXERCISE 2
 
-Determine the mean, median, variance, and standard deviation for *run time*, *aired episodes* and *year* of the tv show dataframe.
-***
+1. Calculate the variance and standard deviation for Petal.Length.
 
-## <a name = "box"><a/>Box Plots
+### <a name = "freq"><a/>  Frequency distributions
 
-We can graphically represent how our data is distributed by creating box plots. These will allow us to visualize quartiles, the mean, and general variation of our data. 
+The distribution of data set (or population) allows us to observe the possible range of values and how often these occur. Depending on the type of variable we are dealing with, we may choose different methods to visualize them. We will use the **ggplot2** R package to visualize our data. 
+
+###<a name = "bar"><a/> Barplot
+
+When dealing with qualitative variables we use barplots or bargraphs. Here, the *x*-axis is discrete and represents our categories while the *y*-axis represents counts. We will now create a barplot to visualize the number of male patients in the *cgd* database compared to the number of female patients.
+
+```{r}
+library(ggplot2)
+
+ggplot(data = cgd, aes(x = sex)) + geom_bar(stat = "count") #geom_bar creates the barplot
+                                                            #stat parameter indicates what is to be plotted
+```
+
+We can modify plot appearance and add a title
+```{r}
+ggplot(data = cgd, aes(x = sex)) + 
+  geom_bar(fill = "#FF9999", width = 0.5, stat = "count") + #change color and bar width
+  ggtitle("Patient sex")                                   #add title
+```
+
+Click [here](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) for more information on ggplot colors.
+
+### EXCERCISE 3
+
+1. Using the *iris* dataframe create a barplot of Species frequency.
+
+###<a name = "hist"><a/> Histogram
+
+To plot quantitative data however, we use histograms. The approach is fairly similar to creating barplots except we will substitute ```geom_bar()``` with ```geom_histogram```. Let's plot the distribution of weights for our cgd patients.
+
+```{r}
+ggplot(data = cgd, aes(x = weight)) + 
+  geom_histogram(binwidth = 20, fill = "white", colour = "black") +
+  ggtitle("Patient weights") # binwidth indicates how large our groups are
+```
+
+Adding a line for the mean:
+```{r}
+ggplot(data = cgd, aes(x = weight)) + 
+  geom_histogram(binwidth = 20, fill = "white", colour = "black") +
+  geom_vline(aes(xintercept = mean(weight)), color = "red") + #geom_vline adds vertical line
+  ggtitle("Patient weights")
+```
+
+Furthermore, we may also want to compare distributions between populations, for example ages between female and male patients. 
+
+```{r}
+ggplot(data = cgd, aes(x = age, fill= sex)) +
+  geom_histogram(binwidth = 10, alpha = 0.5, position = "identity") +
+  ggtitle("Patient age by sex")
+```
+
+We could also visualize this as density plots
 
 ```{r}
 
-boxplot(ratings, horizontal = TRUE)
+ggplot(data = cgd, aes(x = age, fill = sex)) + 
+  geom_density(alpha = 0.3) +
+  ggtitle("Density plot of ages by sex")
+```
+
+### EXCERCISE 3
+
+Using the *iris* dataframe:
+
+1. Create a histogram for Sepal width
+2. Create overlapping density plots for Petal length by species.
+
+
+## <a name = "box"><a/>Box Plots
+
+We can also graphically represent the distribution of our quantitative data  by creating box plots. These will allow us to visualize quartiles, the mean, and general variation of our data. 
+
+Once again we will compare distribution of ages among female and male cgd patients.
+
+```{r}
+ggplot(data = cgd, aes(x = sex, y = age, fill = sex)) + #note x and y are inverted now
+  geom_boxplot() + ggtitle("Boxplot of Patient age by sex")
 ```
 
 ### EXCERCISE 6
 
-Create a boxplot to describe the number of aired episodes for tv shows.
+Using the *iris database:
+
+1. Create a boxplot for Petal Length by species. How does this compare to the histogram from the previous exercise? 
+
+For more on ggplot graphs refer to [Rcookbook](http://www.cookbook-r.com/Graphs/).
 
 
