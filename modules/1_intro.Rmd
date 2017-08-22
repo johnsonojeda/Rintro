@@ -179,7 +179,7 @@ This means that R will:
 
 To know what is your current directory you only need to type:
 
-```{r}
+```{r, eval = FALSE}
 getwd()
 ```
 
@@ -191,7 +191,11 @@ You are able to change your working directory through the RStudio Interface by:
 
 A file browser window should open and you may choose the appropriate folder. 
 
-You can also check what is currently within the directory by using ```dir()```.
+You can also check what is currently within the directory by using 
+
+```{r, eval = FALSE}
+dir()
+```
 
 ### Exercise 4
 
@@ -209,8 +213,8 @@ specific computations require that you download additional *packages*.
 
 **View installed packages:** You can view installed packages by clicking on the **Packages** tab in the bottom-right window. Alternatively, you may use the command line and type:
 
-```{r}
-library()
+```{r, eval = FALSE}
+library("package.name")
 ```
 
 And a list of packages should appear in the *console* window.
@@ -224,7 +228,7 @@ You can also do this through the command line by using the install.packages() co
 
 Loading may be done by checking the boxes located  on the left of the package name in the **Packages** tab or by calling the package through the library() function. If we were now to load *zoo* we would use:
 
-```{r}
+```{r, eval = FALSE}
 library(zoo)
 ```
 
@@ -244,7 +248,7 @@ There is a great amount of online resources that may help you with R. Some popul
 
 Furthermore, R also has a repository of help vignettes that can be called upon by using the help function. If you wished to visualize the help vignette for the column bind function you would type :
 
-```{r}
+```{r, eval = FALSE}
 ?cbind
 ```
 
