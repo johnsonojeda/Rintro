@@ -6,21 +6,27 @@ output: html_document
 highlight: tango
 ---
 
-### Frequency distribution
+### Quantitative and Qualitative data
 
-1. Obtain the general frequency (counts) of patients for each *cancer* stage. Is this qualitative or quantitative data? 
-2. What is the relative frequency (proportion) of *cancer* patients receiving treatment? 
-3. What is the range of Cist number at week 3? 
+1. Upload the *soil* dataframe
+2. Get a summary of your data
+3. Identify which variables are quantitative and which are qualitatitve 
+4. Upload the *cancer* dataframe
+5. Which variables are continuous and which are discrete? 
 
-### Descriptive statistics
 
-1. Using quartiles, determine under what age are 75% of the patients.
+### Central tendency and variation 
+
+Using the *cancer* dataframe 
+
+1. Using quartiles/percentiles, determine under what age are 75% of the patients.
 2. What is the mean weight  of *cancer* patients at admission? And the median? 
 3. What is the variance and standard deviation of *cancer* patient weight? What does this tell us?
 
-### Plots
+### Distributions
 
 1. Create a boxplot for patient age. 
 2. Create a histogram for patient weight.
 3. Create a barplot for stage. 
 4. Why do we use histogram for weight and barplot for stage?
+

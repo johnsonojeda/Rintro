@@ -1,5 +1,5 @@
 ---
-title: "Importing and Exporting data files"
+title: "Introduction to R | Importing and Exporting data files"
 author: "EcoHealth Alliance"
 date: "March 2, 2016"
 output: html_document

@@ -30,16 +30,15 @@ Use R to calculate
 
 ### Libraries & Packages
 1. Check if you have the *tools, foreign, base* packages installed
-2. Install those packages that are not in your library with the *install.packages*() function
-3. Load *tools* with *library*() function
+2. Install those packages that are not in your library with the ```install.packages()``` function
+3. Load *tools* with ```library()``` function
 4. Load *foreign* using the graphic interface 
 
 ### Getting Help
 
-1. Ask R for help for the following function *cbind, class, mean*
-2. What does *class*() do? 
-3. What do you need to execute *cbind*()? 
-4. What does the *na.rm* parameter indicate in the *mean*() function? 
-
+1. Ask R for help for the following function ```cbind```, ```class```, ```mean```
+2. What does ```class```() do? 
+3. What do you need to execute ```cbind()```? 
+4. What does the ```na.rm``` parameter indicate in the ```mean()``` function? 
 
 

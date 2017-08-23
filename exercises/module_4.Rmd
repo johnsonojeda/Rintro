@@ -1,16 +1,17 @@
 ---
-title: "Exercises | Manipulating data"
+title: "Exercises | Data Manipulation"
 theme : united
 author: "EcoHealth Alliance"
 output: html_document
 highlight: tango
 ---
 
-### Data structure
+### Data structure part 2
 
-1. Check the structure of the *soil* dataframe
-2. What variable class does *Layer* belong to? 
-4. How many levels does *Forest Type* have? What are they?
+1. How many rows are there in the *soil* dataframe? 
+2. How many variables does the *soil* dataframe have?  
+3. Retrieve the first 6 and last 6 entries of this dataframe.
+4. Retrieve the value for the 4th row and 5th column.
 
 ### Drop/Add columns
 
@@ -33,5 +34,6 @@ highlight: tango
 4. How many observations does *acidic* have? 
 
 ### Operations
-1. Using the *cancer* dataframe, create a new vector (Cdiff) by calculating the total difference in cist numbers(inital to week 4). 
-2. Append *Cdiff* to your dataframe. **Hint** *cbind*() 
+1. Load the *cancer* dataframe
+2. Using the *cancer* dataframe, create a new column (Cdiff) by calculating the total difference in cist numbers(inital to week 4). 
+2. Append *Cdiff* to your dataframe. **Hint** use the **$** operator

@@ -1,24 +1,25 @@
 ---
-title: "Excercises | Importing/Exporting data"
+title: "Exercises | Data types"
 theme : united
 author: "EcoHealth Alliance"
 output: html_document
 highlight: tango
 ---
 
-**NOTE**:
+### Dataframe structures
+1. Check the structure of the *soil* dataframe
+2. What types of variables does it have? 
+3. How many levels does *Forest_type* have? What does this mean? 
 
-Before proceeding to complete this section's excercises please make sure you have downloaded the [Example data](https://github.com/johnsonojeda/Rintro/tree/master/example_data) 
-files and saved them in your **data** folder within your working directory. 
+2. Use R to calculate:
+- a * b
+- b - (c/a)
+- (c/a)^2 - (b*a) + a 
 
-### Importing 
+### Data types 
 
-1. Create a dataframe called *soil* and import the **soil.csv** file. How many functions can you use to do this? 
-2. Import the **livestock_asia.xlsx** file. Do you need to load a package? Which one?
-3. Import the **Cancer.sav** file. What package should you use? 
-
-### Exporting
-
-1. Export the **livestock** data to a tabulated TXT file. Do you need to load a package for this?   
-2. Export the **soil** data to a SPSS format file. Which package should you use?  
-3. Export the **cancer** data to a Stata binary format file.
+1. What data class does *Mic_BiomassC* belong to? 
+2. Coerce *Mic_BiomassC* into an integer? Retrieve its new value
+3. Coerce *pH* into a character, can this value be used for computation? 
+3. Which variable would you choose to convert from factor to character? Why? 
+4. Corece the variable you determined in *3* to a character.
