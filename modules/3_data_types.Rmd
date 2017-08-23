@@ -20,23 +20,25 @@ highlight: tango
 ## <a name = "str"><a/> Dataframe structure
 
 Now that we know how to import dataframes from other sources, we can check
-the structure or data types within it.
+their structure.
 
 We will start by loading the *cgd* (Chronic Granulotomous Disease data) dataset built into the *survival* package.
 
-```{r}
+```{r, echo = FALSE}
 # First we need to load the package
 library(survival)
 
 # Then load the cgd dataframe
 data("cgd") 
+```
 
+```{r}
 #Visualize the structure of the dataframe using the str() function
 
 str(cgd)
 ```
 
-We can now see each component vector of the dataframe separately, the first elements within each vector and the data category to which the vector belongs to. In this case we have 4 types of data *integers* (e.g. id, age), *numerics* (e.g. height, weight), *factors* (e.g. treatment, sex) and *date*. 
+We can now visualize the number of observations (203) and variables (16) in this dataframe. Likewise, we can see the first elements for each variable (column) and the data class to which it belongs to. In this case we have 4 types of data *integers* (e.g. id, age), *numerics* (e.g. height, weight), *factors* (e.g. treatment, sex) and *date*. 
 
 ###Exercise 1
 
@@ -62,20 +64,17 @@ When using the ```class()``` function, we can observe that *weight* is indeed a 
 
 ```{r}
 age = cgd$age
-
-print(age)
 class(age)
 ```
 
-We see that even though *age* is also a number, it is calssified as a *integer* variable. Non-decimal variables are called *integers*. We can transform these integer values into numeric (with decimals) by calling the ```as.numeric()``` function.
+We see that even though *age* is also a number, it is calssified as a *integer* variable. Non-decimal variables are called *integers*.
+
+We can transform these integer values into numeric (with decimals) by calling the ```as.numeric()``` function.
 
 ```{r}
 age_num = as.numeric(age)
-
-print(age_num)
 class(age_num)
 ```
-
 
 We can also coerce numeric values into integer variables by using the ```as.integer()``` function.
 
@@ -87,6 +86,9 @@ class(weight_int)                # Get new integer vector
 
 
 Note that R coerces numeric variables into integers by deleting any decimals or *rounding down*.
+```{r}
+print(weight_int)
+```
 
 Keep in mind that the default for R is to interpret numbers as numerics. So when you import a dataframe from another source integer values will be assumed to be numeric, that is having decimal values. 
 
@@ -100,14 +102,14 @@ Keep in mind that the default for R is to interpret numbers as numerics. So when
 
 ## <a name = "char"><a/> Factors & Characters
 
-Factors are categorical variables, meaning that they can only take a limited number of differnt values. For example, in the *sex* vector of the *cgd * dataframe, we only observe 2 possible values female and male. 
+Factors are categorical variables, meaning that they can only take a limited number of differnt values. For example, in the *sex* column of the *cgd * dataframe, we only observe 2 possible categories, male and female. 
 
 ```{r}
-
 class(cgd$sex)
+levels(cgd$sex)
 ```
 
-Though dealing with a limited number of categories is useful, when we have to many it may be unmanageable. In that case we may prefer working with character variables. These are string (or letter) values, however they are not restricted to a limited number of categories. Like factors, Character strings are also enclosed in quotations (```" "```).
+Though dealing with a limited categories is useful, however as the number of these category levels increase it may become unmanageable. In that case we may prefer working with character variables. These are string (or letter) values, however they are not restricted to a limited number of categories. Like factors, Character strings are also enclosed in quotations (```" "```).
 
 We can easily convert factors into characters with the ```as.character()``` function. Let's do it for the *center* column within the *cgd* dataframe:
 
@@ -116,7 +118,7 @@ cgd$center = as.character(cgd$center)
 
 class(cgd$center)
 ```
-Note that by using the *$* operator we are not creating a new vector as we had done previously, rather we are choosing the Column (center) within the dataframe (cgd) and applying the function to that specific column in the dataframe. Such that:
+Note that by using the **$** operator we are not creating a new vector as we had done previously, rather we are choosing the column (center) within the dataframe (cgd) and applying these changes direclty to the dataframe. Such that:
 
 ```{r}
 str(cgd)
@@ -127,3 +129,4 @@ We can see that that the class for *center* has changed.
 ### Excercise 3
 
 1. Transform the *Species* column into a character vector. 
+

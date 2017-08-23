@@ -144,19 +144,19 @@ $(document).ready(function () {
 </div>
 <div id="quick-intro-to-variables" class="section level2">
 <h2><a name="varintro"><a></a>Quick intro to variables</h2>
-<p>Variables are names we to values or set of values to be stored an manipulated in R.</p>
-<p>These can be numeric values:</p>
+<p>Variables are names we assign to a value or set of values to be stored an manipulated in R.</p>
+<p>These values can be numeric:</p>
 <pre class="r"><code>x = 10    # assign a value to x
 y = 2     # assign a value to y
 
 x         # print x</code></pre>
 <pre><code>## [1] 10</code></pre>
-<p>Or character (letters/strings):</p>
+<p>Or characters (letters/strings):</p>
 <pre class="r"><code>Name = &quot;Susan&quot;
 
 print(Name)</code></pre>
 <pre><code>## [1] &quot;Susan&quot;</code></pre>
-<p>We can also assign a single variable to an array of values (vectors). These can also be numeric or character vectors:</p>
+<p>We can also assign a variable name to an array of values (vectors). Vectors can also be numerics or characters:</p>
 <pre class="r"><code># a numeric vector
 numer = c(1,2,3) #the letter c before the parenthesis is the &quot;concatenate&quot; fun
 
@@ -167,68 +167,85 @@ print(numer)</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
 <pre class="r"><code>print(alpha)</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
-<p>We can even assing matrices to a group a of vectors such as data frames or matrices.</p>
+<p>Note that all elements within a vector must belong to the same class. Let’s see what happens when we create a vector with both numeric and character elements.</p>
+<pre class="r"><code>alphanumer = c(1, &quot;a&quot;, &quot;b&quot;)
+
+print(alphanumer)</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;a&quot; &quot;b&quot;</code></pre>
+<pre class="r"><code>class(alphanumer)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>The number 1 has been converted to a character (“1”). This means that it is no longer recognized as a numeric and cannot be used to perform mathematical operations.</p>
+<p>We can even assing variable names to a group a of vectors such as matrices.</p>
 <pre class="r"><code># create 2 vectors
 numer = c(1,2,3)
+numer2 = c(4,5,6)
 alpha = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
 
-# join these 2 vectors in a single data frame
-df = data.frame(numer, alpha)
+#join the 2 numeric vectors into a matrix
+A = matrix(c(numer, numer2), nrow =2)
+print(A)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<p>Or a dataframe:</p>
+<pre class="r"><code># join these 3 vectors in a single data frame
+df = data.frame(numer, numer2, alpha)
 
 print(df)</code></pre>
-<pre><code>##   numer alpha
-## 1     1     a
-## 2     2     b
-## 3     3     c</code></pre>
-<p>Now that we have a basic understanding of variables, we will now see how we can assign variables to imported data tables from other sources.</p>
+<pre><code>##   numer numer2 alpha
+## 1     1      4     a
+## 2     2      5     b
+## 3     3      6     c</code></pre>
+<p>The main difference between matrices and dataframes is that the latter allow us to group different data types into a single table while all elements in a matrix, just like vectors, must belong to the same class. Usually the data we collect and analyze is in dataframe format.</p>
+<p>Now that we have a basic understanding of variables, we will learn how we can import data tables from other sources and assign variables to them.</p>
 </div>
 <div id="importing" class="section level2">
 <h2><a name="imp"><a></a>Importing</h2>
-<p>We might want to import data stored in other formats (e.g. CSV, SAS, Excel) for analysis in R. When we import data tables into R they create <em>Dataframe</em> objects.</p>
+<p>Many times the data we collect is stored in other formats (e.g. CSV, SAS, Excel) and we may need to import it for analysis in R. When we import data tables into R they create dataframe objects.</p>
 <div id="csv-files" class="section level3">
 <h3><a name="icsv"><a></a>CSV files</h3>
-<p>To import csv files we can use the <em>read.csv</em>() function.</p>
+<p>To import csv files we can use the <code>read.csv()</code> function.</p>
 <pre class="r"><code>csv = read.csv(&quot;MyData.csv&quot;, header= TRUE, sep = &quot;,&quot;)</code></pre>
-<p>Note that <code>header = TRUE</code> is indicating that the first row of the dataframe should not be considered as part of the data since it holds variable names. If this is not the case for your data then you would set <code>header = FALSE</code> within the function.</p>
-<p>The <em>sep</em> parameter indicates the delimiter that should be considered when separating your data into columns. Since this is a <strong>Comma separated value</strong> file, the delimter we set <code>sep = &quot;,&quot;</code>.</p>
+<p>Note that <code>header = TRUE</code> indicates that the first row of the dataframe should not be considered as part of the data since it holds variable names. If this is not the case for your data then you would set <code>header = FALSE</code>.</p>
+<p>The <code>sep</code> parameter indicates the delimiter to be recognized as separator between columns in your data. Since this is a <strong>comma separated value</strong> (csv) file, we should set <em>comma</em> (,) as the delimiter by inputing <code>sep = &quot;,&quot;</code>.</p>
 </div>
 <div id="txt-files" class="section level3">
 <h3><a name="itxt"><a></a>TXT files</h3>
-<p>Flat text files can be imported into R using <em>read.table</em>()</p>
+<p>Flat text files can be imported into R using <code>read.table()</code></p>
 <pre class="r"><code>txt = read.table(&quot;MyData.txt&quot;, header = TRUE, sep = &quot;\t&quot;)</code></pre>
-<p><em>read.table</em>() is a generalized version of <em>read.csv</em>() and can also be used to import CSV files. In this case data was tabulated so we set <code>sep = &quot;\t&quot;</code> as the delimiter.</p>
+<p><code>read.table()</code> is a generalized version of <code>read.csv()</code> and can also be used to import CSV files. In this case the data is tabulated (columns separated by tab) so we set <code>sep = &quot;\t&quot;</code> as the delimiter.</p>
 </div>
 <div id="excel-spreadsheet" class="section level3">
 <h3><a name="ixls"><a></a>Excel spreadsheet</h3>
-<p>We must first load the <em>xlsx</em> library</p>
+<p>Before being able to import excel files, we must first load the <em>xlsx</em> library</p>
 <pre class="r"><code>library(xlsx)
 excel1 = read.xlsx(&quot;MyData.xlsx&quot;, sheetIndex = 1, header = TRUE)</code></pre>
 <p>The <code>sheetIndex = 1</code> parameter is indicating that the first sheet of the workbook is to be imported as a dataframe. If you wish to load information from another sheet you may either indicate its index or alternatively its name.</p>
 <pre class="r"><code>excel2 = read.xlsx(&quot;MyData.xlsx&quot;, sheetName = &quot;Sheet2&quot;, header = TRUE)</code></pre>
-<p>The <em>header</em> parameter indicates whether the first row of the dataframes contains variable names/labels (TRUE) or not (FALSE).</p>
+<p>The <code>header</code> parameter indicates whether the first row of the dataframe contains variable names/labels (TRUE) or not (FALSE).</p>
 </div>
 <div id="spss" class="section level3">
 <h3><a name="ispss"><a></a>SPSS</h3>
-<p>R can import SPSS data sets with the <em>read.spss</em>() function from the <em>foreign</em> package.</p>
+<p>R can import SPSS data sets with the <code>read.spss()</code> function from the <em>foreign</em> package.</p>
 <pre class="r"><code># Load the foreign package
 library(foreign)
 spss1 = read.spss(&quot;MyData.sav&quot;, use.value.label = TRUE, to.data.frame = TRUE)</code></pre>
 <p><code>use.value.label = TRUE</code> converts all variables with labels in SPSS into factors in R, while <code>to.data.frame = TRUE</code> converts the data into an R dataframe.</p>
-<p>Alternatively, we can use the <em>spss.get</em>() function from the <em>Hmisc</em> package.</p>
+<p>Alternatively, we can use the <code>spss.get()</code> function from the <em>Hmisc</em> package.</p>
 <pre class="r"><code>install.packages(&quot;Hmisc&quot;) #if not previously installed
 library(Hmisc)
 spss2 = spss.get(&quot;MyData.sav&quot;, use.value.label = TRUE)</code></pre>
-<p>Keep in midne that <em>foreign</em> is a default library to R, <em>Hmisc</em> must be installed before loading.</p>
+<p>Keep in mind that <em>foreign</em> is a default R library, <em>Hmisc</em> must be installed before loading.</p>
 </div>
 <div id="sas" class="section level3">
-<h3><a name="isas"><a></a> SAS</h3>
-<p>There are different ways in which you can import SAS files into R, however the most convinient is to export your SAS dataset into CSV and then import it using the <em>read.csv</em>() function as mentioned previously.</p>
-<p>Another way you can import your SAS data is by using the <em>sasxport.get</em>() function from the <em>Hmisc</em> library</p>
+<h3><a name="isas"><a></a>SAS</h3>
+<p>There are different ways in which you can import SAS files into R, however the most convenient is to export your SAS dataset into CSV and then import it using the <code>read.csv()</code> function as mentioned previously.</p>
+<p>Another way you can import your SAS data is by using the <code>sasxport.get()</code> function from the <em>Hmisc</em> library.</p>
 <pre class="r"><code>sas = sasxport.get(&quot;MyData.xpt&quot;)</code></pre>
 </div>
 <div id="stata" class="section level3">
 <h3><a name="istata"><a></a>Stata</h3>
-<p>To import Stata files we will also use the <em>foreign</em> package and its <em>read.dta</em>() function.</p>
+<p>To import Stata files we will also use the <em>foreign</em> package and its <code>read.dta()</code> function.</p>
 <pre class="r"><code>library(foreign)
 stata = read.dta(&quot;MyData.dta&quot;)</code></pre>
 <hr />
@@ -239,16 +256,16 @@ stata = read.dta(&quot;MyData.dta&quot;)</code></pre>
 <p>Exporting dataframes or result tables from R to other formats is also possible.</p>
 <div id="csv-files-1" class="section level3">
 <h3><a name="ecsv"><a></a>CSV files</h3>
-<p>Exporting csv files from R can be done using the <em>write.csv</em>() function.</p>
+<p>Exporting csv files from R can be done using the <code>write.csv()</code> function.</p>
 <pre class="r"><code>write.csv(data, file = &quot;MyData.csv&quot;)</code></pre>
-<p>Note that by default your files will be saved in your working directory. If you wish to save these somewhere else you <em>must</em> specify the file path. For example:</p>
+<p>Note that by default your files will be saved in your working directory. If you wish to save these somewhere else you <strong>must</strong> specify the file path. For example:</p>
 <pre class="r"><code>write.csv(data, file = &quot;C:/MyFilePath/MyData.csv&quot;)</code></pre>
 </div>
 <div id="txt" class="section level3">
 <h3><a name="etxt"><a></a>TXT</h3>
-<p>Exporting to a generic txt file is similar to exporting csv files. In this case we will use the <em>write.table</em>() command.</p>
+<p>Exporting a generic txt file is similar to exporting csv files. In this case we will use the <code>write.table()</code> command.</p>
 <pre class="r"><code>write.table(data, file = &quot;MyData.txt&quot;, sep = &quot;\t&quot;)</code></pre>
-<p>Note that we have set <code>sep = &quot;\t&quot;</code> and thus have created a tabulated file. We could have created a csv file by setting the <em>sep</em> parameter to “,”.</p>
+<p>Note that we have set <code>sep = &quot;\t&quot;</code> and thus created a tabulated file. We could have created a csv file by setting the <code>sep = &quot;,&quot;</code>.</p>
 </div>
 <div id="excel-spreadsheet-1" class="section level3">
 <h3><a name="exls"><a></a>Excel spreadsheet</h3>
@@ -258,19 +275,19 @@ write.xlsx(csv, &quot;MyData.xlsx&quot;)</code></pre>
 </div>
 <div id="spss-1" class="section level3">
 <h3><a name="ispss"><a></a>SPSS</h3>
-<p>As with importing, the <em>foreign</em> library is necessary to export SPSS file via its <em>write.foreign</em>() function.</p>
+<p>As with importing, the <em>foreign</em> library is necessary to export SPSS file via its <code>write.foreign()</code> function.</p>
 <pre class="r"><code>write.foreign(csv, datafile = &quot;MyData.txt&quot;, codefile = &quot;MyData.sps&quot;, 
               package = &quot;SPSS&quot;)</code></pre>
 </div>
 <div id="sas-1" class="section level3">
 <h3><a name="isas"><a></a>SAS</h3>
-<p>The <em>write.foreign</em>() function from <em>foreign</em> can also be used to export dataframes in SAS format in a similar way to SPSS files.</p>
+<p>The <code>write.foreign()</code> function from <em>foreign</em> can also be used to export dataframes in SAS format in a similar way to SPSS files.</p>
 <pre class="r"><code>write.foreign(csv, datafile = &quot;MyData.txt&quot;, codefile = &quot;MyData.sas&quot;, 
               package = &quot;SAS&quot;)</code></pre>
 </div>
 <div id="stata-1" class="section level3">
 <h3><a name="istata"><a></a>Stata</h3>
-<p>The <em>foreign</em> package is also required to export Stata files. <em>write.dta</em>() can be used to export dataframes in Stata binary format</p>
+<p>The <em>foreign</em> package is also required to export Stata files. <code>write.dta()</code> can be used to export dataframes in Stata binary format</p>
 <pre class="r"><code>write.dta(csv, &quot;MyData.dta&quot;)</code></pre>
 </div>
 </div>

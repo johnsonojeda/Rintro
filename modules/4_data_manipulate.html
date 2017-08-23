@@ -133,40 +133,52 @@ $(document).ready(function () {
 <h2><a name="df"><a></a>Dataframes</h2>
 <p>We have learned how to load dataframes and view the different types of data structures within them. We will now learn how to explore and manipulate these dataframes.</p>
 <p>The first row in a dataframe is called the <em>header</em> and holds all column (variable) names. The first column of the dataframe usually consists of rownames. However, rownames aren’t always present in dataframes. All rows after the <em>header</em> are called <em>data rows</em>. Each member of a row is called a <em>cell</em>.</p>
-<p>We can find out how many rows and columns are in our dataframe.</p>
-<pre class="r"><code>#Using the USMortality dataframe from the lattice package
-library(lattice)</code></pre>
-<pre><code>## Warning: package 'lattice' was built under R version 3.3.3</code></pre>
-<pre class="r"><code>data(&quot;USMortality&quot;)
-
-nrow(USMortality)    # Number of rows in mtcars</code></pre>
-<pre><code>## [1] 40</code></pre>
-<pre class="r"><code>ncol(USMortality) # Number of columns in mtcars</code></pre>
-<pre><code>## [1] 5</code></pre>
-<p>Likewise, we can take a look at the first (head) and last (tail) elements of the dataframe.</p>
-<pre class="r"><code>head(USMortality) # First 6 elements</code></pre>
-<pre><code>##    Status    Sex         Cause  Rate  SE
-## 1   Urban   Male Heart disease 210.2 0.2
-## 2   Rural   Male Heart disease 242.7 0.6
-## 3   Urban Female Heart disease 132.5 0.2
-## 4   Rural Female Heart disease 154.9 0.4
-## 53  Urban   Male        Cancer 195.9 0.2
-## 54  Rural   Male        Cancer 219.3 0.5</code></pre>
-<pre class="r"><code>tail(USMortality) # Last 6 elements</code></pre>
-<pre><code>##     Status    Sex     Cause Rate  SE
-## 419  Urban Female   Suicide  5.3 0.0
-## 420  Rural Female   Suicide  6.2 0.1
-## 469  Urban   Male Nephritis 15.7 0.1
-## 470  Rural   Male Nephritis 18.3 0.2
-## 471  Urban Female Nephritis 10.7 0.0
-## 472  Rural Female Nephritis 13.9 0.1</code></pre>
+<p>Let’s continue exploring the <em>cgd</em> dataframe from the <em>survival</em> package.</p>
+<pre><code>## Warning: package 'survival' was built under R version 3.3.3</code></pre>
+<p>We can quickly look at the number of rows in our dataframe</p>
+<pre class="r"><code>nrow(cgd)    # Number of rows in cgd</code></pre>
+<pre><code>## [1] 203</code></pre>
+<p>Likewise we can look at the number of columns, or in this case variables</p>
+<pre class="r"><code>ncol(cgd) # Number of variables in cgd</code></pre>
+<pre><code>## [1] 16</code></pre>
+<p>If we want to get a geneal idea of what our dataframe looks like, we can take a look at its first (head) entries</p>
+<pre class="r"><code>head(cgd) # First 6 elements</code></pre>
+<pre><code>##   id            center     random   treat    sex age height weight
+## 1  1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
+## 2  1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
+## 3  1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
+## 4  2 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
+## 5  2 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
+## 6  2 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
+##     inherit steroids propylac  hos.cat tstart enum tstop status
+## 1 autosomal        0        0 US:other      0    1   219      1
+## 2 autosomal        0        0 US:other    219    2   373      1
+## 3 autosomal        0        0 US:other    373    3   414      0
+## 4 autosomal        0        1 US:other      0    1     8      1
+## 5 autosomal        0        1 US:other      8    2    26      1
+## 6 autosomal        0        1 US:other     26    3   152      1</code></pre>
+<p>or last (tail) ones</p>
+<pre class="r"><code>tail(cgd) # Last 6 elements</code></pre>
+<pre><code>##      id               center     random   treat    sex age height weight
+## 198 132 L.A. Children's Hosp 1989-12-25 placebo female   7  113.0   20.4
+## 199 132 L.A. Children's Hosp 1989-12-25 placebo female   7  113.0   20.4
+## 200 133 L.A. Children's Hosp 1989-12-28  rIFN-g   male  15  178.7   60.5
+## 201 134    Scripps Institute 1989-12-29 placebo female   6  130.0   21.6
+## 202 134    Scripps Institute 1989-12-29 placebo female   6  130.0   21.6
+## 203 135    Scripps Institute 1989-12-29 placebo female   3   96.0   13.1
+##       inherit steroids propylac  hos.cat tstart enum tstop status
+## 198 autosomal        0        1 US:other      0    1   120      1
+## 199 autosomal        0        1 US:other    120    2   203      0
+## 200  X-linked        0        1 US:other      0    1   197      0
+## 201 autosomal        0        1 US:other      0    1   104      1
+## 202 autosomal        0        1 US:other    104    2   227      0
+## 203 autosomal        0        1 US:other      0    1   227      0</code></pre>
 <p>We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.</p>
-<pre class="r"><code>USMortality[2,3]   # Value from second row and third column</code></pre>
-<pre><code>## [1] Heart disease
-## 10 Levels: Alzheimers Cancer Cerebrovascular diseases ... Unintentional injuries</code></pre>
+<pre class="r"><code>cgd[2,3]   # Value from second row and third column</code></pre>
+<pre><code>## [1] &quot;1989-06-07&quot;</code></pre>
 <p>Additionally, we can find out how many elements are within a single column of the dataframe</p>
-<pre class="r"><code>length(USMortality$Cause)</code></pre>
-<pre><code>## [1] 40</code></pre>
+<pre class="r"><code>length(cgd$center) #should be the same as nrow</code></pre>
+<pre><code>## [1] 203</code></pre>
 <div id="exercise-1" class="section level3">
 <h3>EXERCISE 1</h3>
 <ol style="list-style-type: decimal">
@@ -182,37 +194,43 @@ nrow(USMortality)    # Number of rows in mtcars</code></pre>
 <p>More often than not, dataframes are not structured in a way that is most practical for our analyses. Handling large dataframes may be complicated, data might lack information that we need, etc. We are able to perform several manipulations to dataframes to make handling data more convenient.</p>
 <p><strong>Dropping columns:</strong> Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable.</p>
 <p>We can modify the dataframe by specifying columns we wish to retain:</p>
-<pre class="r"><code>mort.drop = USMortality[,3:5] # Create new dataframe with columns 3-5 only
+<pre class="r"><code>cgd.drop = cgd[,2:8] # Create new dataframe with columns 2-8 only
 
-head(mort.drop)</code></pre>
-<pre><code>##            Cause  Rate  SE
-## 1  Heart disease 210.2 0.2
-## 2  Heart disease 242.7 0.6
-## 3  Heart disease 132.5 0.2
-## 4  Heart disease 154.9 0.4
-## 53        Cancer 195.9 0.2
-## 54        Cancer 219.3 0.5</code></pre>
+head(cgd.drop)</code></pre>
+<pre><code>##              center     random   treat    sex age height weight
+## 1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
+## 2 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
+## 3 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
+## 4 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
+## 5 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
+## 6 Scripps Institute 1989-06-07 placebo   male  15    159   47.5</code></pre>
 <p>Another way to do this is by specifying which column is to be dropped preceded by the <em>minus</em> (-) sign as follows:</p>
-<pre class="r"><code>mort.drop = USMortality[,-1] # New dataframe without the first column 
+<pre class="r"><code>cgd.drop = cgd[,-1]    # New dataframe without the first column 
 
-names(mort.drop)        # Print column names of the new dataframe</code></pre>
-<pre><code>## [1] &quot;Sex&quot;   &quot;Cause&quot; &quot;Rate&quot;  &quot;SE&quot;</code></pre>
-<p><strong>Adding columns</strong> : Other times we might want to add information to a dataframe. This is done with the <em>cbind</em> function, as with vectors or matrices.</p>
+names(cgd.drop)        # Print column names of the new dataframe</code></pre>
+<pre><code>##  [1] &quot;center&quot;   &quot;random&quot;   &quot;treat&quot;    &quot;sex&quot;      &quot;age&quot;      &quot;height&quot;  
+##  [7] &quot;weight&quot;   &quot;inherit&quot;  &quot;steroids&quot; &quot;propylac&quot; &quot;hos.cat&quot;  &quot;tstart&quot;  
+## [13] &quot;enum&quot;     &quot;tstop&quot;    &quot;status&quot;</code></pre>
+<p><strong>Adding columns</strong> : Other times we might want to add information to a dataframe. This is done with the `<code>cbind</code> function.</p>
 <p>Let’s assume we wish to add an ID number for each row in the dataframe:</p>
-<pre class="r"><code>IDnumber = 1:nrow(USMortality)           # Create a vector with as many elements as there rows in the dataframe
+<pre class="r"><code>IDnumber = 1:nrow(cgd)    # Create a vector with as many elements as there rows in the dataframe
 
-names(USMortality)                 # Check column names before adding IDnumber</code></pre>
-<pre><code>## [1] &quot;Status&quot; &quot;Sex&quot;    &quot;Cause&quot;  &quot;Rate&quot;   &quot;SE&quot;</code></pre>
-<pre class="r"><code>mort.add = cbind(IDnumber, USMortality)  # Add ID column
+names(cgd)                       # Check column names before adding IDnumber</code></pre>
+<pre><code>##  [1] &quot;id&quot;       &quot;center&quot;   &quot;random&quot;   &quot;treat&quot;    &quot;sex&quot;      &quot;age&quot;     
+##  [7] &quot;height&quot;   &quot;weight&quot;   &quot;inherit&quot;  &quot;steroids&quot; &quot;propylac&quot; &quot;hos.cat&quot; 
+## [13] &quot;tstart&quot;   &quot;enum&quot;     &quot;tstop&quot;    &quot;status&quot;</code></pre>
+<pre class="r"><code>cgd.add = cbind(IDnumber, cgd)   # Add ID column
 
-names(mort.add)             # Column names after adding IDnumber</code></pre>
-<pre><code>## [1] &quot;IDnumber&quot; &quot;Status&quot;   &quot;Sex&quot;      &quot;Cause&quot;    &quot;Rate&quot;     &quot;SE&quot;</code></pre>
+names(cgd.add)                   # Column names after adding IDnumber</code></pre>
+<pre><code>##  [1] &quot;IDnumber&quot; &quot;id&quot;       &quot;center&quot;   &quot;random&quot;   &quot;treat&quot;    &quot;sex&quot;     
+##  [7] &quot;age&quot;      &quot;height&quot;   &quot;weight&quot;   &quot;inherit&quot;  &quot;steroids&quot; &quot;propylac&quot;
+## [13] &quot;hos.cat&quot;  &quot;tstart&quot;   &quot;enum&quot;     &quot;tstop&quot;    &quot;status&quot;</code></pre>
 <p>Keep in mind that the order in which you enter the elements in the <em>cbind</em> function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column.</p>
 <div id="excercise-3" class="section level3">
 <h3>EXCERCISE 3</h3>
 <ol style="list-style-type: decimal">
 <li><p>Drop the following columns from the iris dataframe : Sepal.Width, Petal.Width</p></li>
-<li><p>Add an column with IDnumber to the iris dataframe</p></li>
+<li><p>Add a column with IDnumber to the iris dataframe</p></li>
 </ol>
 <hr />
 </div>
@@ -220,138 +238,190 @@ names(mort.add)             # Column names after adding IDnumber</code></pre>
 <div id="data-summary" class="section level2">
 <h2><a name="dsum"><a></a>Data summary</h2>
 <p>Something that could be quite useful to provide a better understanding of our data is to get a quick statistical summary of our dataframe.</p>
-<pre class="r"><code>summary(USMortality)</code></pre>
-<pre><code>##    Status       Sex                          Cause         Rate       
-##  Rural:20   Female:20   Alzheimers              : 4   Min.   :  5.30  
-##  Urban:20   Male  :20   Cancer                  : 4   1st Qu.: 18.98  
-##                         Cerebrovascular diseases: 4   Median : 30.05  
-##                         Diabetes                : 4   Mean   : 58.73  
-##                         Flu and pneumonia       : 4   3rd Qu.: 52.90  
-##                         Heart disease           : 4   Max.   :242.70  
-##                         (Other)                 :16                   
-##        SE      
-##  Min.   :0.00  
-##  1st Qu.:0.10  
-##  Median :0.20  
-##  Mean   :0.18  
-##  3rd Qu.:0.20  
-##  Max.   :0.60  
+<pre class="r"><code>summary(cgd)</code></pre>
+<pre><code>##        id                          center       random          
+##  Min.   :  1.00   NIH                 :41   Min.   :1989-06-07  
+##  1st Qu.: 24.50   Scripps Institute   :36   1st Qu.:1989-08-19  
+##  Median : 54.00   Amsterdam           :28   Median :1989-09-15  
+##  Mean   : 58.09   Univ. of Zurich     :21   Mean   :1989-09-22  
+##  3rd Qu.: 89.50   Mott Children's Hosp:20   3rd Qu.:1989-11-03  
+##  Max.   :135.00   L.A. Children's Hosp:13   Max.   :1989-12-29  
+##                   (Other)             :44                       
+##      treat         sex           age           height     
+##  placebo:120   male  :168   Min.   : 1.0   Min.   : 76.3  
+##  rIFN-g : 83   female: 35   1st Qu.: 6.0   1st Qu.:114.5  
+##                             Median :12.0   Median :140.0  
+##                             Mean   :13.7   Mean   :138.1  
+##                             3rd Qu.:20.0   3rd Qu.:169.2  
+##                             Max.   :44.0   Max.   :189.0  
+##                                                           
+##      weight            inherit       steroids          propylac     
+##  Min.   : 10.40   X-linked :131   Min.   :0.00000   Min.   :0.0000  
+##  1st Qu.: 20.25   autosomal: 72   1st Qu.:0.00000   1st Qu.:1.0000  
+##  Median : 33.40                   Median :0.00000   Median :1.0000  
+##  Mean   : 39.34                   Mean   :0.03448   Mean   :0.8473  
+##  3rd Qu.: 58.70                   3rd Qu.:0.00000   3rd Qu.:1.0000  
+##  Max.   :101.50                   Max.   :1.00000   Max.   :1.0000  
+##                                                                     
+##              hos.cat        tstart           enum           tstop      
+##  US:NIH          : 41   Min.   :  0.0   Min.   :1.000   Min.   :  4.0  
+##  US:other        :108   1st Qu.:  0.0   1st Qu.:1.000   1st Qu.:204.5  
+##  Europe:Amsterdam: 28   Median :  0.0   Median :1.000   Median :273.0  
+##  Europe:other    : 26   Mean   : 69.5   Mean   :1.665   Mean   :254.1  
+##                         3rd Qu.:121.0   3rd Qu.:2.000   3rd Qu.:320.0  
+##                         Max.   :373.0   Max.   :8.000   Max.   :439.0  
+##                                                                        
+##      status      
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :0.0000  
+##  Mean   :0.3744  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000  
 ## </code></pre>
 <p>The <code>summary()</code> function allows us to explore the number of counts and labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)</p>
 <div id="excercise-4" class="section level3">
 <h3>EXCERCISE 4</h3>
 <ol style="list-style-type: decimal">
 <li>Summarize the <em>iris</em> dataframe</li>
-<li>What is the maximum Petal lenght?</li>
-<li>How setosa individuals are there?</li>
+<li>What is the maximum Petal length?</li>
+<li>How many individuals of the <em>setosa</em> species are there?</li>
 </ol>
 <hr />
 </div>
 </div>
 <div id="change-column-names" class="section level2">
 <h2><a name="colname"><a></a>Change column names</h2>
-<p>Column and row names can be changed by the colnames() and rownames() functions respectively.</p>
-<pre class="r"><code>mort.head = head(USMortality)  # New data frame with only first 6 rows
+<p>Column and row names can be changed with <code>colnames()</code> and <code>rownames()</code> respectively.</p>
+<pre class="r"><code>cgd.head = head(cgd[1:5])  # New data frame with only first 6 rows
 
+colnames(cgd.head) = c(&quot;col1&quot;, &quot;col2&quot;, &quot;col3&quot;, &quot;col4&quot;, &quot;col5&quot;)    # Change column names
 
-colnames(mort.head) = c(&quot;col1&quot;, &quot;col2&quot;, &quot;col3&quot;, &quot;col4&quot;, &quot;col5&quot;)    # Change column names
+rownames(cgd.head) = c(&quot;ID1&quot;, &quot;ID2&quot;, &quot;ID3&quot;, &quot;ID4&quot;, &quot;ID5&quot;, &quot;ID6&quot;) # Change row names
 
-rownames(mort.head) = c(&quot;ID1&quot;, &quot;ID2&quot;, &quot;ID3&quot;, &quot;ID4&quot;, &quot;ID5&quot;, &quot;ID6&quot;) # Change row names
-
-mort.head #print dataframe</code></pre>
-<pre><code>##      col1   col2          col3  col4 col5
-## ID1 Urban   Male Heart disease 210.2  0.2
-## ID2 Rural   Male Heart disease 242.7  0.6
-## ID3 Urban Female Heart disease 132.5  0.2
-## ID4 Rural Female Heart disease 154.9  0.4
-## ID5 Urban   Male        Cancer 195.9  0.2
-## ID6 Rural   Male        Cancer 219.3  0.5</code></pre>
+cgd.head #print dataframe</code></pre>
+<pre><code>##     col1              col2       col3    col4   col5
+## ID1    1 Scripps Institute 1989-06-07  rIFN-g female
+## ID2    1 Scripps Institute 1989-06-07  rIFN-g female
+## ID3    1 Scripps Institute 1989-06-07  rIFN-g female
+## ID4    2 Scripps Institute 1989-06-07 placebo   male
+## ID5    2 Scripps Institute 1989-06-07 placebo   male
+## ID6    2 Scripps Institute 1989-06-07 placebo   male</code></pre>
 <p>You can also change the name of a particular column by specifying its number</p>
-<pre class="r"><code>colnames(mort.head)[2]  = &quot;NewColName&quot; # Specifiy the number of the column being renamed
+<pre class="r"><code>colnames(cgd.head)[2]  = &quot;NewColName&quot; # Specifiy the number of the column being renamed
 
-names(mort.head)                       # Print new column names</code></pre>
+names(cgd.head)                       # Print new column names</code></pre>
 <pre><code>## [1] &quot;col1&quot;       &quot;NewColName&quot; &quot;col3&quot;       &quot;col4&quot;       &quot;col5&quot;</code></pre>
 <hr />
 </div>
 <div id="subsetting-the-dataframe" class="section level2">
 <h2><a name="subset"><a></a>Subsetting the dataframe</h2>
-<p>There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in those entries where the <em>Rate</em> is larger than 50.</p>
-<pre class="r"><code>large_rate = USMortality[USMortality$Rate &gt; 50,]  # Get all rows with rate greater than 50
-                                                  # The comma is important here
+<p>There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in those entries where patients younger than 20 years of age.</p>
+<pre class="r"><code>cgdU20 = cgd[cgd$age &lt; 20,]             # Get all rows with age smaller than 20
+                                        # The comma is important here
 
-summary(large_rate)</code></pre>
-<pre><code>##    Status      Sex                         Cause        Rate      
-##  Rural:6   Female:4   Cancer                  :4   Min.   : 62.8  
-##  Urban:4   Male  :6   Heart disease           :4   1st Qu.:134.4  
-##                       Lower respiratory       :1   Median :152.8  
-##                       Unintentional injuries  :1   Mean   :158.1  
-##                       Alzheimers              :0   3rd Qu.:206.6  
-##                       Cerebrovascular diseases:0   Max.   :242.7  
-##                       (Other)                 :0                  
-##        SE      
-##  Min.   :0.20  
-##  1st Qu.:0.20  
-##  Median :0.30  
-##  Mean   :0.33  
-##  3rd Qu.:0.40  
-##  Max.   :0.60  
-## </code></pre>
-<p>Or we might be interested only in Rural areas</p>
-<pre class="r"><code>Rural = USMortality[USMortality$Status == &quot;Rural&quot;,] # Get all rows with Status = Rural 
-                                                    # The comma is important here
+summary(cgdU20$age)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   5.000   8.000   9.047  13.000  19.000</code></pre>
+<p>Or we might be interested only in a specific treatment</p>
+<pre class="r"><code>Placebo = cgd[cgd$Streat == &quot;placebo&quot;,]     # Get all rows with treat = placebo 
+                                            # The comma is important here
 
-head(Rural)                                         # Print first values of the dataframe</code></pre>
-<pre><code>##     Status    Sex             Cause  Rate  SE
-## 2    Rural   Male     Heart disease 242.7 0.6
-## 4    Rural Female     Heart disease 154.9 0.4
-## 54   Rural   Male            Cancer 219.3 0.5
-## 56   Rural Female            Cancer 150.8 0.4
-## 106  Rural   Male Lower respiratory  62.8 0.3
-## 108  Rural Female Lower respiratory  46.9 0.2</code></pre>
-<p>However if we use <em>str</em>() we will notice that the other levels for statuses have been retained. This happens because Status is a <em>factor</em>.</p>
-<pre class="r"><code>str(Rural)</code></pre>
-<pre><code>## 'data.frame':    20 obs. of  5 variables:
-##  $ Status: Factor w/ 2 levels &quot;Rural&quot;,&quot;Urban&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ Sex   : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
-##  $ Cause : Factor w/ 10 levels &quot;Alzheimers&quot;,&quot;Cancer&quot;,..: 6 6 2 2 7 7 10 10 3 3 ...
-##  $ Rate  : num  242.7 154.9 219.3 150.8 62.8 ...
-##  $ SE    : num  0.6 0.4 0.5 0.4 0.3 0.2 0.3 0.2 0.2 0.2 ...</code></pre>
+head(Placebo$treat)                         # Print first values of the dataframe</code></pre>
+<pre><code>## factor(0)
+## Levels: placebo rIFN-g</code></pre>
+<p>However if we use <em>str</em>() we will notice that the other levels for treatment have been retained. This happens because Status is a <em>factor</em>.</p>
+<pre class="r"><code>str(Placebo)</code></pre>
+<pre><code>## 'data.frame':    0 obs. of  16 variables:
+##  $ id      : int 
+##  $ center  : Factor w/ 13 levels &quot;Harvard Medical Sch&quot;,..: 
+##  $ random  :Class 'Date'  num(0) 
+##  $ treat   : Factor w/ 2 levels &quot;placebo&quot;,&quot;rIFN-g&quot;: 
+##  $ sex     : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 
+##  $ age     : int 
+##  $ height  : num 
+##  $ weight  : num 
+##  $ inherit : Factor w/ 2 levels &quot;X-linked&quot;,&quot;autosomal&quot;: 
+##  $ steroids: num 
+##  $ propylac: num 
+##  $ hos.cat : Factor w/ 4 levels &quot;US:NIH&quot;,&quot;US:other&quot;,..: 
+##  $ tstart  : int 
+##  $ enum    : int 
+##  $ tstop   : int 
+##  $ status  : int</code></pre>
 <p>To succesfully subset dataframes by factors we must use <em>droplevels</em>().</p>
-<pre class="r"><code>Rural = droplevels(USMortality[USMortality$Status == &quot;Rural&quot;,]) #The comma is important
-str(Rural)</code></pre>
-<pre><code>## 'data.frame':    20 obs. of  5 variables:
-##  $ Status: Factor w/ 1 level &quot;Rural&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ Sex   : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1 2 1 2 1 2 1 ...
-##  $ Cause : Factor w/ 10 levels &quot;Alzheimers&quot;,&quot;Cancer&quot;,..: 6 6 2 2 7 7 10 10 3 3 ...
-##  $ Rate  : num  242.7 154.9 219.3 150.8 62.8 ...
-##  $ SE    : num  0.6 0.4 0.5 0.4 0.3 0.2 0.3 0.2 0.2 0.2 ...</code></pre>
-<p>Furthermore, we can exclude rows with certain values by using logical operators. For example, we will retrieve all entries where Cause is not cancer.</p>
-<pre class="r"><code>other.cause = droplevels(USMortality[USMortality$Cause != &quot;Cancer&quot;,]) # Get all rows with Cause different from cancer
-                                                                      # != means different than
-summary(other.cause)</code></pre>
-<pre><code>##    Status       Sex                          Cause         Rate       
-##  Rural:18   Female:18   Alzheimers              : 4   Min.   :  5.30  
-##  Urban:18   Male  :18   Cerebrovascular diseases: 4   1st Qu.: 18.15  
-##                         Diabetes                : 4   Median : 25.90  
-##                         Flu and pneumonia       : 4   Mean   : 45.64  
-##                         Heart disease           : 4   3rd Qu.: 42.77  
-##                         Lower respiratory       : 4   Max.   :242.70  
-##                         (Other)                 :12                   
-##        SE        
-##  Min.   :0.0000  
-##  1st Qu.:0.1000  
-##  Median :0.1000  
-##  Mean   :0.1639  
-##  3rd Qu.:0.2000  
-##  Max.   :0.6000  
-## </code></pre>
-<div id="excercise" class="section level3">
-<h3>EXCERCISE</h3>
+<pre class="r"><code>Placebo = droplevels(cgd[cgd$treat == &quot;placebo&quot;,]) #The comma is important
+str(Placebo)</code></pre>
+<pre><code>## 'data.frame':    120 obs. of  16 variables:
+##  $ id      : int  2 2 2 2 2 2 2 2 5 5 ...
+##  $ center  : Factor w/ 13 levels &quot;Harvard Medical Sch&quot;,..: 2 2 2 2 2 2 2 2 4 4 ...
+##  $ random  : Date, format: &quot;1989-06-07&quot; &quot;1989-06-07&quot; ...
+##  $ treat   : Factor w/ 1 level &quot;placebo&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ sex     : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ age     : int  15 15 15 15 15 15 15 15 17 17 ...
+##  $ height  : num  159 159 159 159 159 ...
+##  $ weight  : num  47.5 47.5 47.5 47.5 47.5 47.5 47.5 47.5 52.7 52.7 ...
+##  $ inherit : Factor w/ 2 levels &quot;X-linked&quot;,&quot;autosomal&quot;: 2 2 2 2 2 2 2 2 1 1 ...
+##  $ steroids: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ propylac: num  1 1 1 1 1 1 1 1 1 1 ...
+##  $ hos.cat : Factor w/ 4 levels &quot;US:NIH&quot;,&quot;US:other&quot;,..: 2 2 2 2 2 2 2 2 1 1 ...
+##  $ tstart  : int  0 8 26 152 241 249 322 350 0 246 ...
+##  $ enum    : int  1 2 3 4 5 6 7 8 1 2 ...
+##  $ tstop   : int  8 26 152 241 249 322 350 439 246 253 ...
+##  $ status  : int  1 1 1 1 1 1 1 0 1 1 ...</code></pre>
+<p>Furthermore, we can exclude rows with certain values by using logical operators. For example, we will retrieve all entries where the patient is not female.</p>
+<pre class="r"><code>cgd.male = droplevels(cgd[cgd$sex != &quot;female&quot;,])  # Get all rows with sex different from female
+                                                  # != means different than
+summary(cgd.male$sex)</code></pre>
+<pre><code>## male 
+##  168</code></pre>
+<div id="excercise-5" class="section level3">
+<h3>EXCERCISE 5</h3>
 <p>Using the <em>iris</em> dataframe create different subsets for:</p>
 <ol style="list-style-type: decimal">
-<li><p>All flowers with petals longer than 4mm</p></li>
+<li><p>All flowers with petals 4mm or longer</p></li>
 <li><p>Flowers with petal widths smaller than 1mm</p></li>
 <li><p>All species except <em>virginica</em></p></li>
+</ol>
+</div>
+<div id="operations-with-dataframes" class="section level3">
+<h3>Operations with dataframes</h3>
+<p>R also allows us to perform calculations on specific dataframe columns. For example, let’s convert <em>height</em> so it is represented in meters instead of centimeters.</p>
+<pre class="r"><code>cgd$height = cgd$height/100   #convert from centimeters to meters 
+
+print(head(cgd$height))</code></pre>
+<pre><code>## [1] 1.47 1.47 1.47 1.59 1.59 1.59</code></pre>
+<p>We can also create new columns and add them to the dataframe by performing operations between 2 or more columns. For example, we will calculate the Body Mass Index (BMI) and add this new variable to the <em>cgd</em> dataframe.</p>
+<pre class="r"><code>cgd$BMI = cgd$weight/((cgd$height*100)^2) #BMI = Kg/cm^2 
+
+print(head(cgd))</code></pre>
+<pre><code>##   id            center     random   treat    sex age height weight
+## 1  1 Scripps Institute 1989-06-07  rIFN-g female  12   1.47   62.0
+## 2  1 Scripps Institute 1989-06-07  rIFN-g female  12   1.47   62.0
+## 3  1 Scripps Institute 1989-06-07  rIFN-g female  12   1.47   62.0
+## 4  2 Scripps Institute 1989-06-07 placebo   male  15   1.59   47.5
+## 5  2 Scripps Institute 1989-06-07 placebo   male  15   1.59   47.5
+## 6  2 Scripps Institute 1989-06-07 placebo   male  15   1.59   47.5
+##     inherit steroids propylac  hos.cat tstart enum tstop status
+## 1 autosomal        0        0 US:other      0    1   219      1
+## 2 autosomal        0        0 US:other    219    2   373      1
+## 3 autosomal        0        0 US:other    373    3   414      0
+## 4 autosomal        0        1 US:other      0    1     8      1
+## 5 autosomal        0        1 US:other      8    2    26      1
+## 6 autosomal        0        1 US:other     26    3   152      1
+##           BMI
+## 1 0.002869175
+## 2 0.002869175
+## 3 0.002869175
+## 4 0.001878881
+## 5 0.001878881
+## 6 0.001878881</code></pre>
+</div>
+<div id="exercise-6" class="section level3">
+<h3>EXERCISE 6</h3>
+<ol style="list-style-type: decimal">
+<li>Convert Sepal.Length from <em>mm</em> to <em>cm</em></li>
+<li>Create a new column <em>Petal.Ratio</em> by calculating Petal length divided by width ***</li>
 </ol>
 </div>
 </div>

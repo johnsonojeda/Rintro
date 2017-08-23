@@ -1,8 +1,8 @@
 ---
-title: "Descriptive Statistics"
+title: "Introduction to R | Descriptive Statistics"
 author: "EcoHealth Alliance"
-date: "February 8, 2016"
 output: html_document
+highlight: tango
 ---
 
 <img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
@@ -28,23 +28,21 @@ output: html_document
 
 Data can be separated into two categories depending on how they represent observations or measurements of a given variable. 
 
-Data is *quantitative* if measurements can be represented numerically, in other words if data can be quantified (e.g. age, weight, height).
+Data is *quantitative* if measurements can be represented numerically, in other words if data can be quantified (e.g. age, weight, height).Furthermore, *quantitative* data can be either *continuous* if it can take any value within a range (e.g. height, weight) or *discrete* if it can only take specific values (e.g. age). *Qualitative* data on the other hand, refers to non-numerical, nominal data (e.g. sex, yes-no answers).
 
-Furthermore, *quantitative* data can be either *continuous* if it can take any value within a range (e.g. height, weight) or *discrete* if it can only take specific values (e.g. age).
-
-*Qualitative* data on the other hand, refers to non-numerical, nominal data (e.g. sex, yes-no answers).
-
-It is important to understand the differences between these types of data in order to properly choose the statistical analyses to be applied. For this reason we will first consider methods related to qualitative data and then will move on to methods for the analysis of quantitative data. 
-
+It is important to understand the differences between these types of data in order to properly choose the statistical analyses to be applied. We will focus primarily related to quantitative data and will briefly touch on descriptive methods for qualitative data. 
 
 ### <a name = "cent"><a/> Measures of central Tendency 
 
 As we saw in the previous section, we can get a general idea of the distribution of our data using the ```summary()``` function. 
 
-```{r, echo = FALSE, cache.comments = TRUE}
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 
 library(survival)
 data("cgd")
+```
+
+```{r}
 
 summary(cgd)
 ```
@@ -55,44 +53,53 @@ We can also calculate these values for specific variables via the ```mean()``` a
 
 ```{r}
 
-weight = cgd$weight           
+mean(cgd$weight)               # mean weight
 
-mean(weight)               # mean weight
-
-median(weight)             # median for weight
+median(cgd$weight)             # median for weight
 
 ```
 
-We can also take a look at quartiles and percentlies. Quartiles divide our data into four equal parts and allow us to know the proportion of our data that falls under a certain value. The first or lower quartile cuts off the first 25% of the data, the second quartile (or median) cuts at 50%, and the upper (third) quartile at 75%.
+We can also take a look at the proportion of our data that falls under certain values. Quartiles divide our data into four equal parts, the first or lower quartile cuts off the first 25% of the data, the second quartile (or median) cuts at 50%, and the upper (third) quartile at 75%. 
 
 ```{r} 
 
-quantile(weight) # will show us the quartile distribution of our data
-
-quantile(weight, 0.95) # shows us the 95th percentile
-
+quantile(cgd$weight) # will show us the quartile distribution of our data
 ```
+
+In essence percentiles act the same as quartiles except these divide our data into 100 equal groups. We can use percentiles to visualize what value cuts 95% of our data for example. 
+```{r}
+quantile(cgd$weight, 0.95) # shows us the 95th percentile
+```
+
+We are also able to get a general idea of the range within the majority (75%) of our data lies by computing the *interquartile range*
+
+```{r}
+IQR(cgd$weight)
+```
+
 
 ### EXERCISE 1
 
 1. Upload the *iris* dataframe
 2. What is the mean value for Petal.Width? The median?
-3. Calculate the 5th and 95th percentile for Sepal.Length
+3. Calculate the quartiles for Sepal.Width
+3. Calculate the 10th and 90th percentile for Sepal.Length
+4. Determie the interquartile range for Petal.Width
 
 ## <a name = "varmes"><a/> Measures of dispersion 
 
-To further understand the distribution of our data we need to know how spread out the data is. We can do this using measures of dispersion. 
+To further understand the distribution of our data we need to know how how much it varies. We can do this using measures of dispersion. 
 
 *Variance* is a measure of how much our data is dispersed around the mean. In other words, it is the average distances of our sample values from the mean. This helps us understand how much variation is there within our sample population. 
 
 ```{r}
-var(weight)
+var(cgd$weight)
 ```
 
 *Standard deviation* is the square root of the variance. Many times it is prefered to represent variation since it usually yields more manageable values than the variance. However, both values are equally valid and may be used to asses variation within a particular population. 
 
 ```{r}
-sd(weight)
+sd(cgd$weight)
 ```
 
 ### EXERCISE 2
@@ -101,24 +108,25 @@ sd(weight)
 
 ### <a name = "freq"><a/>  Frequency distributions
 
-The distribution of data set (or population) allows us to observe the possible range of values and how often these occur. Depending on the type of variable we are dealing with, we may choose different methods to visualize them. We will use the **ggplot2** R package to visualize our data. 
+The distribution of data set allows us to observe the possible range of values and how often these occur within our sample population. Depending on the type of variable we are dealing with, we may choose different methods to visualize them. We will use the **ggplot2** R package to visualize our data. 
+
+***
 
 ###<a name = "bar"><a/> Barplot
 
-When dealing with qualitative variables we use barplots or bargraphs. Here, the *x*-axis is discrete and represents our categories while the *y*-axis represents counts. We will now create a barplot to visualize the number of male patients in the *cgd* database compared to the number of female patients.
+When dealing with qualitative variables we use barplots or bargraphs. Here, the *x*-axis is discrete and represents our categories while the *y*-axis represents counts. We will now create a barplot to visualize the number of male and female patients in the *cgd* database.
 
 ```{r}
 library(ggplot2)
 
-ggplot(data = cgd, aes(x = sex)) + geom_bar(stat = "count") #geom_bar creates the barplot
-                                                            #stat parameter indicates what is to be plotted
+ggplot(data = cgd, aes(x = sex)) + geom_bar(stat = "count") #geom_bar creates the barplot. The stat parameter indicates what is to be plotted
 ```
 
 We can modify plot appearance and add a title
 ```{r}
 ggplot(data = cgd, aes(x = sex)) + 
   geom_bar(fill = "#FF9999", width = 0.5, stat = "count") + #change color and bar width
-  ggtitle("Patient sex")                                   #add title
+  ggtitle("Patient sex")                                    #add title
 ```
 
 Click [here](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) for more information on ggplot colors.
@@ -129,7 +137,7 @@ Click [here](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) for more inform
 
 ###<a name = "hist"><a/> Histogram
 
-To plot quantitative data however, we use histograms. The approach is fairly similar to creating barplots except we will substitute ```geom_bar()``` with ```geom_histogram```. Let's plot the distribution of weights for our cgd patients.
+To plot quantitative data however, we use histograms. The approach is fairly similar to creating barplots except we will substitute ```geom_bar()``` with ```geom_histogram()```. Let's plot the distribution of weights for our cgd patients.
 
 ```{r}
 ggplot(data = cgd, aes(x = weight)) + 
@@ -162,17 +170,18 @@ ggplot(data = cgd, aes(x = age, fill = sex)) +
   ggtitle("Density plot of ages by sex")
 ```
 
-### EXCERCISE 3
+### EXCERCISE 4
 
 Using the *iris* dataframe:
 
 1. Create a histogram for Sepal width
 2. Create overlapping density plots for Petal length by species.
 
+***
 
 ## <a name = "box"><a/>Box Plots
 
-We can also graphically represent the distribution of our quantitative data  by creating box plots. These will allow us to visualize quartiles, the mean, and general variation of our data. 
+We can also graphically represent the distribution of our quantitative data  by creating boxplots. These will allow us to visualize quartiles, the mean, and general variation of our data. 
 
 Once again we will compare distribution of ages among female and male cgd patients.
 
@@ -181,12 +190,15 @@ ggplot(data = cgd, aes(x = sex, y = age, fill = sex)) + #note x and y are invert
   geom_boxplot() + ggtitle("Boxplot of Patient age by sex")
 ```
 
-### EXCERCISE 6
+### EXCERCISE 5
 
-Using the *iris database:
+Using the *iris* database:
 
 1. Create a boxplot for Petal Length by species. How does this compare to the histogram from the previous exercise? 
 
 For more on ggplot graphs refer to [Rcookbook](http://www.cookbook-r.com/Graphs/).
+
+***
+
 
 
