@@ -24,7 +24,7 @@ highlight: tango
 
 [Boxplot](#box)
 
-##<a name = "qvq"><a/> Quantitative vs qualitative data
+### <a name = "qvq"><a/> Quantitative vs qualitative data
 
 Data can be separated into two categories depending on how they represent observations or measurements of a given variable. 
 
