@@ -2,7 +2,7 @@
 title: "Introduction to R | Getting started"
 theme : united
 author: "EcoHealth Alliance"
-output: html_document
+output: github_document
 highlight: tango
 ---
 <img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
