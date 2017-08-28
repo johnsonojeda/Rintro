@@ -1,0 +1,254 @@
+---
+title: "Introduction to R | Data Manipulation"
+author: "EcoHealth Alliance"
+output: github_document
+---
+
+<img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
+
+## Contents
+
+
+[More about dataframes](#df)
+
+[Drop or add columns](#drop)
+
+[Data summary](#dsum)
+
+[Change column names](#colname)
+
+[Subsetting the dataframe](#subset)
+
+
+## <a name = "df"><a/>Dataframes 
+
+We have learned how to load dataframes and view the different types of data 
+structures within them. We will now learn how to explore and manipulate these
+dataframes.
+
+The first row in a dataframe is called the *header* and holds all  column (variable) names. 
+The first column of the dataframe usually consists of rownames. However, rownames aren't 
+always present in dataframes. All rows after the *header* are called *data rows*. 
+Each member of a row is called a *cell*. 
+
+Let's continue exploring the *cgd* dataframe from the *survival* package.
+```{r, echo = FALSE}
+#Using the cgd dataframe from the survival package
+library(survival)
+data("cgd")
+```
+
+We can quickly look at the number of rows in our dataframe
+```{r}
+nrow(cgd)    # Number of rows in cgd
+```
+
+Likewise we can look at the number of columns, or in this case variables
+```{r}
+ncol(cgd) # Number of variables in cgd
+```
+
+If we want to get a geneal idea of what our dataframe looks like, we can take a look at its first (head) entries
+```{r}
+head(cgd) # First 6 elements
+```
+
+or last (tail) ones
+```{r}
+tail(cgd) # Last 6 elements
+```
+
+We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.
+
+```{r}
+cgd[2,3]   # Value from second row and third column
+```
+
+Additionally, we can find out how many elements are within a single column of the dataframe
+
+```{r}
+length(cgd$center) #should be the same as nrow
+```
+
+### EXERCISE 1
+
+1. Load the in-buitl *iris* dataframe
+2. How many rows are in this dataframe? 
+3. Get the first 6 elements of the dataframe
+
+***
+
+## <a name = "drop"><a/> Drop or add columns
+
+More often than not, dataframes are not structured in a way that is most practical for our analyses. Handling large dataframes may be complicated, data might lack information that we need, etc. We are able to perform several manipulations to dataframes to make handling data more convenient. 
+
+**Dropping columns:** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable. 
+
+We can modify the dataframe by specifying columns we wish to retain:
+
+```{r}
+
+cgd.drop = cgd[,2:8] # Create new dataframe with columns 2-8 only
+
+head(cgd.drop)
+```
+
+Another way to do this is by specifying which column is to be dropped preceded by the *minus* (-) sign as follows:
+
+```{r}
+
+cgd.drop = cgd[,-1]    # New dataframe without the first column 
+
+names(cgd.drop)        # Print column names of the new dataframe
+```
+
+**Adding columns** : Other times we might want to add information to a dataframe. This is done with the ```cbind`` function.
+
+Let's assume we wish to add an ID number for each row in the dataframe:
+
+```{r}
+
+IDnumber = 1:nrow(cgd)    # Create a vector with as many elements as there rows in the dataframe
+
+names(cgd)                       # Check column names before adding IDnumber
+
+cgd.add = cbind(IDnumber, cgd)   # Add ID column
+
+names(cgd.add)                   # Column names after adding IDnumber
+```
+
+Keep in mind that the order in which you enter the elements in the *cbind* function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column. 
+
+###EXCERCISE 3
+
+1. Drop the following columns from the iris dataframe : Sepal.Width, Petal.Width
+
+2. Add a column with IDnumber to the iris dataframe
+
+***
+
+## <a name = "dsum"><a/>Data summary 
+
+Something that could be quite useful to provide a better understanding of our data is to get
+a quick statistical summary of our dataframe. 
+
+```{r}
+
+summary(cgd)
+```
+
+The ```summary()``` function allows us to explore the number of counts and 
+labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)
+
+
+### EXCERCISE 4
+
+1. Summarize the *iris* dataframe
+2. What is the maximum Petal length? 
+3. How many individuals of the *setosa* species are there? 
+
+***
+
+## <a name = "colname"><a/>Change column names
+
+Column and row names can be changed with ```colnames()``` and ```rownames()``` respectively.
+
+```{r}
+
+cgd.head = head(cgd[1:5])  # New data frame with only first 6 rows
+
+colnames(cgd.head) = c("col1", "col2", "col3", "col4", "col5")    # Change column names
+
+rownames(cgd.head) = c("ID1", "ID2", "ID3", "ID4", "ID5", "ID6") # Change row names
+
+cgd.head #print dataframe
+```
+
+You can also change the name of a particular column by specifying its number
+
+```{r}
+colnames(cgd.head)[2]  = "NewColName" # Specifiy the number of the column being renamed
+
+names(cgd.head)                       # Print new column names
+```
+
+***
+
+## <a name = "subset"><a/>Subsetting the dataframe
+
+There may be times when we might want to manipulate smaller sets of the original dataframe. For example we may be interested only in those entries where patients younger than 20 years of age.
+
+```{r}
+
+cgdU20 = cgd[cgd$age < 20,]             # Get all rows with age smaller than 20
+                                        # The comma is important here
+
+summary(cgdU20$age)
+
+```
+
+Or we might be interested only in a specific treatment
+
+```{r}
+
+Placebo = cgd[cgd$Streat == "placebo",]     # Get all rows with treat = placebo 
+                                            # The comma is important here
+
+head(Placebo$treat)                         # Print first values of the dataframe
+```
+
+However if we use *str*() we will notice that the other levels for treatment have been retained. This happens because Status is a *factor*. 
+
+```{r}
+str(Placebo)
+```
+To succesfully subset dataframes by factors we must use *droplevels*(). 
+
+```{r}
+Placebo = droplevels(cgd[cgd$treat == "placebo",]) #The comma is important
+str(Placebo)
+```
+
+Furthermore, we can exclude rows with certain values by using logical operators. For example, we will retrieve all entries where the patient is not female.
+
+```{r}
+
+cgd.male = droplevels(cgd[cgd$sex != "female",])  # Get all rows with sex different from female
+                                                  # != means different than
+summary(cgd.male$sex)
+```
+
+### EXCERCISE 5
+
+Using the *iris* dataframe create different subsets for:
+
+1. All flowers with petals 4mm or longer
+
+2. Flowers with petal widths smaller than 1mm
+
+3. All species except *virginica*
+
+
+### Operations with dataframes
+
+R also allows us to perform calculations on specific dataframe columns. For example, let's convert *height* so it is represented in meters instead of centimeters.
+
+```{r}
+cgd$height = cgd$height/100   #convert from centimeters to meters 
+
+print(head(cgd$height))
+```
+
+We can also create new columns and add them to the dataframe by performing operations between 2 or more columns. For example, we will calculate the Body Mass Index (BMI) and add this new variable to the *cgd* dataframe.
+
+```{r}
+cgd$BMI = cgd$weight/((cgd$height*100)^2) #BMI = Kg/cm^2 
+
+print(head(cgd))
+```
+
+### EXERCISE 6
+
+1. Convert Sepal.Length from *mm* to *cm*
+2. Create a new column *Petal.Ratio* by calculating Petal length divided by width
+***
