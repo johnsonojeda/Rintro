@@ -42,7 +42,7 @@ Contents
 <a name = "varintro"><a/>Quick intro to variables
 -------------------------------------------------
 
-Variables are names we assign to a value or set of values to be stored and manipulated in R.
+Variables are names we assign to a value or set of values to be stored an manipulated in R.
 
 These values can be numeric:
 
@@ -65,7 +65,7 @@ print(Name)
 
     ## [1] "Susan"
 
-We can also assign a variable name to an array of values (vectors). Vectors can also be numeric or character:
+We can also assign a variable name to an array of values (vectors). Vectors can also be numerics or characters:
 
 ``` r
 # a numeric vector
@@ -103,7 +103,7 @@ class(alphanumer)
 
 The number 1 has been converted to a character ("1"). This means that it is no longer recognized as a numeric and cannot be used to perform mathematical operations.
 
-We can even assign variable names to a group of vectors such as matrices.
+We can even assing variable names to a group a of vectors such as matrices.
 
 ``` r
 # create 2 vectors
@@ -153,7 +153,7 @@ csv = read.csv("MyData.csv", header= TRUE, sep = ",")
 
 Note that `header = TRUE` indicates that the first row of the dataframe should not be considered as part of the data since it holds variable names. If this is not the case for your data then you would set `header = FALSE`.
 
-The `sep` parameter indicates the delimiter to be recognized as separator between columns in your data. Since this is a **comma separated value** (csv) file, we should set *comma* (,) as the delimiter by inputting `sep = ","`.
+The `sep` parameter indicates the delimiter to be recognized as separator between columns in your data. Since this is a **comma separated value** (csv) file, we should set *comma* (,) as the delimiter by inputing `sep = ","`.
 
 ### <a name = "itxt"><a/>TXT files
 

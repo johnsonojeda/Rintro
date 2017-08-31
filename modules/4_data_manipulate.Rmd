@@ -8,89 +8,33 @@ output: github_document
 
 ## Contents
 
-
-[More about dataframes](#df)
-
 [Drop or add columns](#drop)
 
 [Data summary](#dsum)
 
-[Change column names](#colname)
+[Change column/row names](#colname)
 
 [Subsetting the dataframe](#subset)
-
-
-## <a name = "df"><a/>Dataframes 
-
-We have learned how to load dataframes and view the different types of data 
-structures within them. We will now learn how to explore and manipulate these
-dataframes.
-
-The first row in a dataframe is called the *header* and holds all  column (variable) names. 
-The first column of the dataframe usually consists of rownames. However, rownames aren't 
-always present in dataframes. All rows after the *header* are called *data rows*. 
-Each member of a row is called a *cell*. 
-
-Let's continue exploring the *cgd* dataframe from the *survival* package.
-```{r, echo = FALSE}
-#Using the cgd dataframe from the survival package
-library(survival)
-data("cgd")
-```
-
-We can quickly look at the number of rows in our dataframe
-```{r}
-nrow(cgd)    # Number of rows in cgd
-```
-
-Likewise we can look at the number of columns, or in this case variables
-```{r}
-ncol(cgd) # Number of variables in cgd
-```
-
-If we want to get a geneal idea of what our dataframe looks like, we can take a look at its first (head) entries
-```{r}
-head(cgd) # First 6 elements
-```
-
-or last (tail) ones
-```{r}
-tail(cgd) # Last 6 elements
-```
-
-We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.
-
-```{r}
-cgd[2,3]   # Value from second row and third column
-```
-
-Additionally, we can find out how many elements are within a single column of the dataframe
-
-```{r}
-length(cgd$center) #should be the same as nrow
-```
-
-### EXERCISE 1
-
-1. Load the in-buitl *iris* dataframe
-2. How many rows are in this dataframe? 
-3. Get the first 6 elements of the dataframe
-
-***
 
 ## <a name = "drop"><a/> Drop or add columns
 
 More often than not, dataframes are not structured in a way that is most practical for our analyses. Handling large dataframes may be complicated, data might lack information that we need, etc. We are able to perform several manipulations to dataframes to make handling data more convenient. 
 
-**Dropping columns:** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable. 
+**Dropping columns** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable. 
 
-We can modify the dataframe by specifying columns we wish to retain:
+We can modify the dataframe by specifying columns we wish to retain. Let's continue working with
+the cgd data frame from the survival package. 
+
+```{r, echo = FALSE, message=FALSE}
+library(survival)
+data(cgd)
+```
 
 ```{r}
 
 cgd.drop = cgd[,2:8] # Create new dataframe with columns 2-8 only
 
-head(cgd.drop)
+head(cgd.drop)       #Remember to create a new object so you don't lose your original data
 ```
 
 Another way to do this is by specifying which column is to be dropped preceded by the *minus* (-) sign as follows:
@@ -117,7 +61,13 @@ cgd.add = cbind(IDnumber, cgd)   # Add ID column
 names(cgd.add)                   # Column names after adding IDnumber
 ```
 
-Keep in mind that the order in which you enter the elements in the *cbind* function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column. 
+Keep in mind that the order in which you enter the elements in the ```cbind()``` function will determine where the column is added. 
+
+```{r}
+cgd.add2 = cbind(cgd, IDnumber)
+
+names(cgd.add2)                  #IDnumber is now the last column in the dataframe
+```
 
 ###EXCERCISE 3
 
@@ -127,29 +77,7 @@ Keep in mind that the order in which you enter the elements in the *cbind* funct
 
 ***
 
-## <a name = "dsum"><a/>Data summary 
-
-Something that could be quite useful to provide a better understanding of our data is to get
-a quick statistical summary of our dataframe. 
-
-```{r}
-
-summary(cgd)
-```
-
-The ```summary()``` function allows us to explore the number of counts and 
-labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)
-
-
-### EXCERCISE 4
-
-1. Summarize the *iris* dataframe
-2. What is the maximum Petal length? 
-3. How many individuals of the *setosa* species are there? 
-
-***
-
-## <a name = "colname"><a/>Change column names
+## <a name = "colname"><a/>Change column/row names
 
 Column and row names can be changed with ```colnames()``` and ```rownames()``` respectively.
 
@@ -202,7 +130,7 @@ However if we use *str*() we will notice that the other levels for treatment hav
 ```{r}
 str(Placebo)
 ```
-To succesfully subset dataframes by factors we must use *droplevels*(). 
+To successfully subset dataframes by factors we must use *droplevels*(). 
 
 ```{r}
 Placebo = droplevels(cgd[cgd$treat == "placebo",]) #The comma is important
@@ -218,7 +146,7 @@ cgd.male = droplevels(cgd[cgd$sex != "female",])  # Get all rows with sex differ
 summary(cgd.male$sex)
 ```
 
-### EXCERCISE 5
+### EXCERCISE 4
 
 Using the *iris* dataframe create different subsets for:
 
@@ -247,8 +175,28 @@ cgd$BMI = cgd$weight/((cgd$height*100)^2) #BMI = Kg/cm^2
 print(head(cgd))
 ```
 
-### EXERCISE 6
+### EXERCISE 5
 
 1. Convert Sepal.Length from *mm* to *cm*
 2. Create a new column *Petal.Ratio* by calculating Petal length divided by width
 ***
+
+## <a name = "dsum"><a/>Data summary 
+
+Something that could be quite useful to provide a better understanding of our data is to get
+a quick statistical summary of our dataframe. 
+
+```{r}
+
+summary(cgd)
+```
+
+The ```summary()``` function allows us to explore the number of counts and 
+labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)
+
+
+### EXCERCISE 6
+
+1. Summarize the *iris* dataframe
+2. What is the maximum Petal length? 
+3. How many individuals of the *setosa* species are there? 

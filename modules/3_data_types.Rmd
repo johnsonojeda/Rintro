@@ -8,6 +8,7 @@ highlight: tango
 <img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
 
 ## Contents
+[Dataframes](#df)
 
 [Dataframe structure](#str)
 
@@ -17,13 +18,17 @@ highlight: tango
 
 [Vectors](#vec)
 
-## <a name = "str"><a/> Dataframe structure
+## <a name = "df"><a/>Dataframes 
 
-Now that we know how to import dataframes from other sources, we can check
-their structure.
+We have learned how to load dataframes. Now we will explore the general structure 
+of our data and what types of variables it contains. 
 
-We will start by loading the *cgd* (Chronic Granulotomous Disease data) dataset built into the *survival* package.
+The first row in a dataframe is called the *header* and holds all column (variable) names. 
+The first column of the dataframe usually consists of row names. However, row names aren't 
+always present in dataframes. All rows after the *header* are called *data rows*. 
+Each member of a row is called a *cell*. 
 
+We will start by loading the *cgd* (Chronic Granulotomous Disease data) dataset built into the *survival* package.package.
 ```{r, echo = FALSE}
 # First we need to load the package
 library(survival)
@@ -31,6 +36,48 @@ library(survival)
 # Then load the cgd dataframe
 data("cgd") 
 ```
+
+We can quickly look at the number of rows in our dataframe
+```{r}
+nrow(cgd)    # Number of rows in cgd
+```
+
+Likewise we can look at the number of columns, or in this case variables
+```{r}
+ncol(cgd) # Number of variables in cgd
+```
+
+If we want to get a general idea of what our dataframe looks like, we can take a look at its first (head) entries
+```{r}
+head(cgd) # First 6 elements
+```
+
+or last (tail) ones
+```{r}
+tail(cgd) # Last 6 elements
+```
+
+We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.
+
+```{r}
+cgd[2,3]   # Value from second row and third column
+```
+
+Additionally, we can find out how many elements are within a single column of the dataframe
+
+```{r}
+length(cgd$center) #should be the same as nrow
+```
+
+### EXERCISE 1
+
+1. Load the in-built *iris* dataframe
+2. How many rows are in this dataframe? 
+3. Get the first 6 elements of the dataframe
+
+## <a name = "str"><a/> Dataframe structure
+
+We can also check the structure of our dataframe
 
 ```{r}
 #Visualize the structure of the dataframe using the str() function
@@ -40,7 +87,7 @@ str(cgd)
 
 We can now visualize the number of observations (203) and variables (16) in this dataframe. Likewise, we can see the first elements for each variable (column) and the data class to which it belongs to. In this case we have 4 types of data *integers* (e.g. id, age), *numerics* (e.g. height, weight), *factors* (e.g. treatment, sex) and *date*. 
 
-###Exercise 1
+###EXERCISE 2
 
 1. Load the built-in *iris* dataframe using the ```data()``` function.
 2. Check the structure of this dataframe
@@ -67,7 +114,7 @@ age = cgd$age
 class(age)
 ```
 
-We see that even though *age* is also a number, it is calssified as a *integer* variable. Non-decimal variables are called *integers*.
+We see that even though *age* is also a number, it is classified as a *integer* variable. Non-decimal variables are called *integers*.
 
 We can transform these integer values into numeric (with decimals) by calling the ```as.numeric()``` function.
 
@@ -92,17 +139,17 @@ print(weight_int)
 
 Keep in mind that the default for R is to interpret numbers as numerics. So when you import a dataframe from another source integer values will be assumed to be numeric, that is having decimal values. 
 
-### Exercise 2
+### EXERCISE 3
 
 1. Extract the *Petal.Length* column into an independent vector called *PetalLen*
 2. Determine what data type this new vector is using the ```class()``` function.
-3. Corece this vector into an integer
+3. Coerce this vector into an integer
 
 ***
 
 ## <a name = "char"><a/> Factors & Characters
 
-Factors are categorical variables, meaning that they can only take a limited number of differnt values. For example, in the *sex* column of the *cgd * dataframe, we only observe 2 possible categories, male and female. 
+Factors are categorical variables, meaning that they can only take a limited number of different values. For example, in the *sex* column of the *cgd * dataframe, we only observe 2 possible categories, male and female. 
 
 ```{r}
 class(cgd$sex)
@@ -118,7 +165,7 @@ cgd$center = as.character(cgd$center)
 
 class(cgd$center)
 ```
-Note that by using the **$** operator we are not creating a new vector as we had done previously, rather we are choosing the column (center) within the dataframe (cgd) and applying these changes direclty to the dataframe. Such that:
+Note that by using the **$** operator we are not creating a new vector as we had done previously, rather we are choosing the column (center) within the dataframe (cgd) and applying these changes directly to the dataframe. Such that:
 
 ```{r}
 str(cgd)
@@ -126,7 +173,7 @@ str(cgd)
 
 We can see that that the class for *center* has changed.
 
-### Excercise 3
+### EXERCISE 4
 
 1. Transform the *Species* column into a character vector. 
 

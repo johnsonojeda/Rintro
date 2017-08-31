@@ -126,12 +126,12 @@ IQR(cgd$weight)
 2.  What is the mean value for Petal.Width? The median?
 3.  Calculate the quartiles for Sepal.Width
 4.  Calculate the 10th and 90th percentile for Sepal.Length
-5.  Determie the interquartile range for Petal.Width
+5.  Determine the interquartile range for Petal.Width
 
 <a name = "varmes"><a/> Measures of dispersion
 ----------------------------------------------
 
-To further understand the distribution of our data we need to know how how much it varies. We can do this using measures of dispersion.
+To further understand the distribution of our data we need to know how much it varies. We can do this using measures of dispersion.
 
 *Variance* is a measure of how much our data is dispersed around the mean. In other words, it is the average distances of our sample values from the mean. This helps us understand how much variation is there within our sample population.
 
@@ -141,7 +141,7 @@ var(cgd$weight)
 
     ## [1] 476.3818
 
-*Standard deviation* is the square root of the variance. Many times it is prefered to represent variation since it usually yields more manageable values than the variance. However, both values are equally valid and may be used to asses variation within a particular population.
+*Standard deviation* is the square root of the variance. Many times it is preferred to represent variation since it usually yields more manageable values than the variance. However, both values are equally valid and may be used to assess variation within a particular population.
 
 ``` r
 sd(cgd$weight)

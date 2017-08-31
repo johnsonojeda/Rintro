@@ -23,6 +23,8 @@ output: github_document
 
 [Stata](#istata)
 
+[***Viewing data**](#view)
+
 [**Exporting**](#exp)
 
 [CSV files](#ecsv)
@@ -38,7 +40,7 @@ output: github_document
 [Stata](#estata)
 
 ## <a name = "varintro"><a/>Quick intro to variables
-Variables are names we assign to a value or set of values to be stored an manipulated in R. 
+Variables are names we assign to a value or set of values to be stored and manipulated in R. 
 
 These values can be numeric: 
 ```{r}
@@ -55,11 +57,11 @@ Name = "Susan"
 print(Name)
 ```
 
-We can also assign a variable name to an array of values (vectors). Vectors can also be numerics or characters:
+We can also assign a variable name to an array of values (vectors). Vectors can also be numeric or character:
 
 ```{r}
 # a numeric vector
-numer = c(1,2,3) #the letter c before the parenthesis is the "concatenate" fun
+numer = c(1,2,3) #the letter c before the parenthesis is the "concatenate" function
 
 # a character (string/letters) vector
 alpha = c("a", "b", "c")
@@ -79,7 +81,7 @@ class(alphanumer)
 
 The number 1 has been converted to a character ("1"). This means that it is no longer recognized as a numeric and cannot be used to perform mathematical operations.
 
-We can even assing variable names to a group a of vectors such as matrices.
+We can even assign variable names to a group of vectors such as matrices.
 
 ```{r}
 # create 2 vectors
@@ -115,7 +117,7 @@ csv = read.csv("MyData.csv", header= TRUE, sep = ",")
 ```
 Note that ```header = TRUE``` indicates that the first row of the dataframe should not be considered as part of the data since it holds variable names. If this is not the case for your data then you would set ```header = FALSE```.
 
-The ```sep``` parameter indicates the delimiter to be recognized as separator between columns in your data. Since this is a **comma separated value** (csv) file, we should set *comma* (,) as the delimiter by inputing ```sep = "," ```.
+The ```sep``` parameter indicates the delimiter to be recognized as separator between columns in your data. Since this is a **comma separated value** (csv) file, we should set *comma* (,) as the delimiter by inputting ```sep = "," ```.
 
 ### <a name = "itxt"><a/>TXT files
 
@@ -131,25 +133,25 @@ txt = read.table("MyData.txt", header = TRUE, sep = "\t")
 Before being able to import excel files, we must first load the *xlsx* library 
 
 ```{r, eval = FALSE}
-library(xlsx)
-excel1 = read.xlsx("MyData.xlsx", sheetIndex = 1, header = TRUE)
+library(readxl)
+excel1 = as.data.frame(read_xlsx("MyData.xlsx", sheet = 1, col_names = TRUE))
 ```
-The ```sheetIndex = 1``` parameter is indicating that the first sheet of the workbook is to be imported as a dataframe. If you wish to load information from another sheet you may either indicate its index or alternatively its name.
+
+The ```sheet = 1``` parameter is indicating that the first sheet of the workbook is to be imported as a dataframe. If you wish to load information from another sheet you may either indicate its index or alternatively its name.
 
 ```{r, eval = FALSE}
-excel2 = read.xlsx("MyData.xlsx", sheetName = "Sheet2", header = TRUE)
+excel2 = as.data.frame(read_xlsx("MyData.xlsx", sheet = "Sheet2", col_names = TRUE))
 ```
-The ```header``` parameter indicates whether the first row of the dataframe contains variable names/labels (TRUE) or not (FALSE). 
+The ```col_names``` parameter indicates whether the first row of the dataframe contains variable names/labels (TRUE) or not (FALSE). 
 
 ### <a name = "ispss"><a/>SPSS 
-R can import SPSS data sets with the ```read.spss()``` function from the *foreign* package. 
+R can import SPSS data sets with the ```read_._spss()``` function from the *haven* package. 
 
 ```{r, eval = FALSE}
 # Load the foreign package
-library(foreign)
-spss1 = read.spss("MyData.sav", use.value.label = TRUE, to.data.frame = TRUE)
+library(haven)
+spss1 = read_spss("MyData.sav", user_na = FALSE)
 ```
-```use.value.label = TRUE``` converts all variables with labels in SPSS into factors in R, while ```to.data.frame = TRUE``` converts the data into an R dataframe. 
 
 Alternatively, we can use the ```spss.get()``` function from the *Hmisc* package. 
 
@@ -160,26 +162,40 @@ library(Hmisc)
 spss2 = spss.get("MyData.sav", use.value.label = TRUE)
 ```
 
-Keep in mind that *foreign* is a default R library, *Hmisc* must be installed before loading.
+```use.value.label = TRUE``` converts all variables with labels in SPSS into factors in R.
 
 ###<a name = "isas"><a/>SAS
 
 There are different ways in which you can import SAS files into R, however the most convenient is to export your SAS dataset into CSV and then import it using the ```read.csv()``` function as mentioned previously. 
 
-Another way you can import your SAS data is by using the ```sasxport.get()``` function from the *Hmisc* library.
+Another way you can import your SAS data is by using the ```read_sas()``` function from the *haven* library.
 
 ```{r, eval = FALSE}
-sas = sasxport.get("MyData.xpt")
+sas = read_sas("MyData.xpt")
 ```
 ### <a name = "istata"><a/>Stata
 
-To import Stata files we will also use the *foreign* package and its ```read.dta()``` function.
+To import Stata files we will also use the *haven* package and its ```read_stata()```function.
 
 ```{r, eval = FALSE} 
 library(foreign)
-stata = read.dta("MyData.dta")
+stata = read_dta("MyData.dta")
 ```
+
 ***
+### <a name = "view"><a/>Viewing data
+
+Once our data is loaded to the R environment, we can take a quick look at these
+as a table
+
+```{r, eval = FALSE}
+view(sas)
+```
+We can also do this by double-clicking on the R object in the *Environment* tab 
+in the upper right window of **RStudio**.
+
+***
+
 ##<a name = "exp"><a/> Exporting
 Exporting dataframes or result tables from R to other formats is also possible.
 
@@ -212,25 +228,24 @@ write.xlsx(csv, "MyData.xlsx")
 ```
 
 ### <a name = "ispss"><a/>SPSS
-As with importing, the *foreign* library is necessary to export SPSS file via its ```write.foreign()``` function. 
+As with importing, the *haven* library is necessary to export SPSS file via its ```write_sav()``` function. 
 
 ```{r, eval = FALSE}
-write.foreign(csv, datafile = "MyData.txt", codefile = "MyData.sps", 
-              package = "SPSS")
+write_sav(csv, path = "MyData.sps")
 ```
+
 ### <a name = "isas"><a/>SAS
-The ```write.foreign()``` function from *foreign* can also be used to export dataframes in SAS format in a similar way to SPSS files.
+The ```write_sas()``` function from *haven* can also be used to export dataframes in SAS format in a similar way to SPSS files.
 
 ````{r, eval = FALSE}
-write.foreign(csv, datafile = "MyData.txt", codefile = "MyData.sas", 
-              package = "SAS")
+write_sas(csv, path = "MyData.sas")
 ```
 
 ### <a name = "istata"><a/>Stata
-The *foreign* package is also required to export Stata files. ```write.dta()``` can be used to export dataframes in Stata binary format
+The *haven* package is also required to export Stata files. ```write_dta()``` can be used to export dataframes in Stata binary format
 
 ```{r, eval = FALSE}
-write.dta(csv, "MyData.dta")
+write_dta(csv, "MyData.dta")
 ```
 
 

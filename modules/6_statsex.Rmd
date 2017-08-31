@@ -1,0 +1,62 @@
+---
+title: "Introduction to R | Statistical Test examples"
+author: "EcoHealth Alliance"
+output: github_document
+---
+<img src = "rlogo.png" style="position:absolute;top:0px;left:0px;"/>
+
+
+## Contents
+
+[T-test](#ttest)
+
+[Anova](#anov)
+
+[Chi square](#chi)
+
+[Linear regression](#lm)
+
+
+
+R can be used to perform a wide range of powerful statistical analyses ranging from parametric statistics to spatial analyses and more. In this section we will display just a few examples of statistical tests you can perform with this software.
+
+We will be using the *Fatalities* dataset from the *AER* package to show several statistical applications of **R**. This dataframe contains annual US traffic fatalities of the "lower 48" states from 1982-1988. 
+
+```{r}
+library(AER)       #load library and dataframe
+data("Fatalities") #Remember to install the package if you do not have it
+```
+
+### <a name = "ttest"><a/> T-test
+
+To perform T-test we can use the ```t.test()``` function. For example, let's evaluate if there are any significant differences in number of fatalities between driviers aged 15-17 and 21-24 years old
+
+```{r}
+tt1 = t.test(Fatalities$fatal1517, Fatalities$fatal2124) 
+```
+
+Since `p = 1.995e-15` we observe significant differences in number of fatalities between the different age groups. 
+
+Let's suppose that we would now like to see if there are any differences between locations where alcohol breath tests are applied and where these are not applied.
+
+```{r}
+tt2 = t.test(Fatalities$fatal~ Fatalities$breath)
+```  
+
+As we can see, there seems to be a significantly lower number of fatalities in locations where alcohol breath tests are required by law. 
+
+### <a name = "anov"><a/> ANOVA
+
+R is also capable of performing ANOVA tests. Let's apply a single factor ANOVA for number of fatalities per state in the year 1988. 
+
+```{r}
+fat88 = droplevels(Fatalities[Fatalities$year == 1988,])
+
+anv1= aov(Fatalities$fatal ~ Fatalities$state)
+```
+
+### <a name = "lm"><a/> Linear regression
+
+
+```{r}
+lm = lm(fatal ~ youngdrivers + pop + drinkage, data = Fatalities)

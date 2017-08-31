@@ -7,122 +7,29 @@ EcoHealth Alliance
 Contents
 --------
 
-[More about dataframes](#df)
-
 [Drop or add columns](#drop)
 
 [Data summary](#dsum)
 
-[Change column names](#colname)
+[Change column/row names](#colname)
 
 [Subsetting the dataframe](#subset)
-
-<a name = "df"><a/>Dataframes
------------------------------
-
-We have learned how to load dataframes and view the different types of data structures within them. We will now learn how to explore and manipulate these dataframes.
-
-The first row in a dataframe is called the *header* and holds all column (variable) names. The first column of the dataframe usually consists of rownames. However, rownames aren't always present in dataframes. All rows after the *header* are called *data rows*. Each member of a row is called a *cell*.
-
-Let's continue exploring the *cgd* dataframe from the *survival* package.
-
-    ## Warning: package 'survival' was built under R version 3.3.3
-
-We can quickly look at the number of rows in our dataframe
-
-``` r
-nrow(cgd)    # Number of rows in cgd
-```
-
-    ## [1] 203
-
-Likewise we can look at the number of columns, or in this case variables
-
-``` r
-ncol(cgd) # Number of variables in cgd
-```
-
-    ## [1] 16
-
-If we want to get a geneal idea of what our dataframe looks like, we can take a look at its first (head) entries
-
-``` r
-head(cgd) # First 6 elements
-```
-
-    ##   id            center     random   treat    sex age height weight
-    ## 1  1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
-    ## 2  1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
-    ## 3  1 Scripps Institute 1989-06-07  rIFN-g female  12    147   62.0
-    ## 4  2 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
-    ## 5  2 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
-    ## 6  2 Scripps Institute 1989-06-07 placebo   male  15    159   47.5
-    ##     inherit steroids propylac  hos.cat tstart enum tstop status
-    ## 1 autosomal        0        0 US:other      0    1   219      1
-    ## 2 autosomal        0        0 US:other    219    2   373      1
-    ## 3 autosomal        0        0 US:other    373    3   414      0
-    ## 4 autosomal        0        1 US:other      0    1     8      1
-    ## 5 autosomal        0        1 US:other      8    2    26      1
-    ## 6 autosomal        0        1 US:other     26    3   152      1
-
-or last (tail) ones
-
-``` r
-tail(cgd) # Last 6 elements
-```
-
-    ##      id               center     random   treat    sex age height weight
-    ## 198 132 L.A. Children's Hosp 1989-12-25 placebo female   7  113.0   20.4
-    ## 199 132 L.A. Children's Hosp 1989-12-25 placebo female   7  113.0   20.4
-    ## 200 133 L.A. Children's Hosp 1989-12-28  rIFN-g   male  15  178.7   60.5
-    ## 201 134    Scripps Institute 1989-12-29 placebo female   6  130.0   21.6
-    ## 202 134    Scripps Institute 1989-12-29 placebo female   6  130.0   21.6
-    ## 203 135    Scripps Institute 1989-12-29 placebo female   3   96.0   13.1
-    ##       inherit steroids propylac  hos.cat tstart enum tstop status
-    ## 198 autosomal        0        1 US:other      0    1   120      1
-    ## 199 autosomal        0        1 US:other    120    2   203      0
-    ## 200  X-linked        0        1 US:other      0    1   197      0
-    ## 201 autosomal        0        1 US:other      0    1   104      1
-    ## 202 autosomal        0        1 US:other    104    2   227      0
-    ## 203 autosomal        0        1 US:other      0    1   227      0
-
-We can also determine the value of a particular cell by specifying the row and column number from which we wish to extract values.
-
-``` r
-cgd[2,3]   # Value from second row and third column
-```
-
-    ## [1] "1989-06-07"
-
-Additionally, we can find out how many elements are within a single column of the dataframe
-
-``` r
-length(cgd$center) #should be the same as nrow
-```
-
-    ## [1] 203
-
-### EXERCISE 1
-
-1.  Load the in-buitl *iris* dataframe
-2.  How many rows are in this dataframe?
-3.  Get the first 6 elements of the dataframe
-
-------------------------------------------------------------------------
 
 <a name = "drop"><a/> Drop or add columns
 -----------------------------------------
 
 More often than not, dataframes are not structured in a way that is most practical for our analyses. Handling large dataframes may be complicated, data might lack information that we need, etc. We are able to perform several manipulations to dataframes to make handling data more convenient.
 
-**Dropping columns:** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable.
+**Dropping columns** Large dataframes may be troublesome to handle, and may hold information that is not necessary for our particular analyses. We can easily select columns we wish to delete to make our dataframe more manageable.
 
-We can modify the dataframe by specifying columns we wish to retain:
+We can modify the dataframe by specifying columns we wish to retain. Let's continue working with the cgd data frame from the survival package.
+
+    ## Warning: package 'survival' was built under R version 3.3.3
 
 ``` r
 cgd.drop = cgd[,2:8] # Create new dataframe with columns 2-8 only
 
-head(cgd.drop)
+head(cgd.drop)       #Remember to create a new object so you don't lose your original data
 ```
 
     ##              center     random   treat    sex age height weight
@@ -169,7 +76,17 @@ names(cgd.add)                   # Column names after adding IDnumber
     ##  [7] "age"      "height"   "weight"   "inherit"  "steroids" "propylac"
     ## [13] "hos.cat"  "tstart"   "enum"     "tstop"    "status"
 
-Keep in mind that the order in which you enter the elements in the *cbind* function will determine where the column is added. If the vector is entered first, then it will be the first column of the new dataframe, otherwise it will be the last column.
+Keep in mind that the order in which you enter the elements in the `cbind()` function will determine where the column is added.
+
+``` r
+cgd.add2 = cbind(cgd, IDnumber)
+
+names(cgd.add2)                  #IDnumber is now the last column in the dataframe
+```
+
+    ##  [1] "id"       "center"   "random"   "treat"    "sex"      "age"     
+    ##  [7] "height"   "weight"   "inherit"  "steroids" "propylac" "hos.cat" 
+    ## [13] "tstart"   "enum"     "tstop"    "status"   "IDnumber"
 
 ### EXCERCISE 3
 
@@ -179,68 +96,8 @@ Keep in mind that the order in which you enter the elements in the *cbind* funct
 
 ------------------------------------------------------------------------
 
-<a name = "dsum"><a/>Data summary
----------------------------------
-
-Something that could be quite useful to provide a better understanding of our data is to get a quick statistical summary of our dataframe.
-
-``` r
-summary(cgd)
-```
-
-    ##        id                          center       random          
-    ##  Min.   :  1.00   NIH                 :41   Min.   :1989-06-07  
-    ##  1st Qu.: 24.50   Scripps Institute   :36   1st Qu.:1989-08-19  
-    ##  Median : 54.00   Amsterdam           :28   Median :1989-09-15  
-    ##  Mean   : 58.09   Univ. of Zurich     :21   Mean   :1989-09-22  
-    ##  3rd Qu.: 89.50   Mott Children's Hosp:20   3rd Qu.:1989-11-03  
-    ##  Max.   :135.00   L.A. Children's Hosp:13   Max.   :1989-12-29  
-    ##                   (Other)             :44                       
-    ##      treat         sex           age           height     
-    ##  placebo:120   male  :168   Min.   : 1.0   Min.   : 76.3  
-    ##  rIFN-g : 83   female: 35   1st Qu.: 6.0   1st Qu.:114.5  
-    ##                             Median :12.0   Median :140.0  
-    ##                             Mean   :13.7   Mean   :138.1  
-    ##                             3rd Qu.:20.0   3rd Qu.:169.2  
-    ##                             Max.   :44.0   Max.   :189.0  
-    ##                                                           
-    ##      weight            inherit       steroids          propylac     
-    ##  Min.   : 10.40   X-linked :131   Min.   :0.00000   Min.   :0.0000  
-    ##  1st Qu.: 20.25   autosomal: 72   1st Qu.:0.00000   1st Qu.:1.0000  
-    ##  Median : 33.40                   Median :0.00000   Median :1.0000  
-    ##  Mean   : 39.34                   Mean   :0.03448   Mean   :0.8473  
-    ##  3rd Qu.: 58.70                   3rd Qu.:0.00000   3rd Qu.:1.0000  
-    ##  Max.   :101.50                   Max.   :1.00000   Max.   :1.0000  
-    ##                                                                     
-    ##              hos.cat        tstart           enum           tstop      
-    ##  US:NIH          : 41   Min.   :  0.0   Min.   :1.000   Min.   :  4.0  
-    ##  US:other        :108   1st Qu.:  0.0   1st Qu.:1.000   1st Qu.:204.5  
-    ##  Europe:Amsterdam: 28   Median :  0.0   Median :1.000   Median :273.0  
-    ##  Europe:other    : 26   Mean   : 69.5   Mean   :1.665   Mean   :254.1  
-    ##                         3rd Qu.:121.0   3rd Qu.:2.000   3rd Qu.:320.0  
-    ##                         Max.   :373.0   Max.   :8.000   Max.   :439.0  
-    ##                                                                        
-    ##      status      
-    ##  Min.   :0.0000  
-    ##  1st Qu.:0.0000  
-    ##  Median :0.0000  
-    ##  Mean   :0.3744  
-    ##  3rd Qu.:1.0000  
-    ##  Max.   :1.0000  
-    ## 
-
-The `summary()` function allows us to explore the number of counts and labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)
-
-### EXCERCISE 4
-
-1.  Summarize the *iris* dataframe
-2.  What is the maximum Petal length?
-3.  How many individuals of the *setosa* species are there?
-
-------------------------------------------------------------------------
-
-<a name = "colname"><a/>Change column names
--------------------------------------------
+<a name = "colname"><a/>Change column/row names
+-----------------------------------------------
 
 Column and row names can be changed with `colnames()` and `rownames()` respectively.
 
@@ -325,7 +182,7 @@ str(Placebo)
     ##  $ tstop   : int 
     ##  $ status  : int
 
-To succesfully subset dataframes by factors we must use *droplevels*().
+To successfully subset dataframes by factors we must use *droplevels*().
 
 ``` r
 Placebo = droplevels(cgd[cgd$treat == "placebo",]) #The comma is important
@@ -361,7 +218,7 @@ summary(cgd.male$sex)
     ## male 
     ##  168
 
-### EXCERCISE 5
+### EXCERCISE 4
 
 Using the *iris* dataframe create different subsets for:
 
@@ -413,7 +270,65 @@ print(head(cgd))
     ## 5 0.001878881
     ## 6 0.001878881
 
-### EXERCISE 6
+### EXERCISE 5
 
 1.  Convert Sepal.Length from *mm* to *cm*
 2.  Create a new column *Petal.Ratio* by calculating Petal length divided by width \*\*\*
+
+<a name = "dsum"><a/>Data summary
+---------------------------------
+
+Something that could be quite useful to provide a better understanding of our data is to get a quick statistical summary of our dataframe.
+
+``` r
+summary(cgd)
+```
+
+    ##        id                          center       random          
+    ##  Min.   :  1.00   NIH                 :41   Min.   :1989-06-07  
+    ##  1st Qu.: 24.50   Scripps Institute   :36   1st Qu.:1989-08-19  
+    ##  Median : 54.00   Amsterdam           :28   Median :1989-09-15  
+    ##  Mean   : 58.09   Univ. of Zurich     :21   Mean   :1989-09-22  
+    ##  3rd Qu.: 89.50   Mott Children's Hosp:20   3rd Qu.:1989-11-03  
+    ##  Max.   :135.00   L.A. Children's Hosp:13   Max.   :1989-12-29  
+    ##                   (Other)             :44                       
+    ##      treat         sex           age           height     
+    ##  placebo:120   male  :168   Min.   : 1.0   Min.   :0.763  
+    ##  rIFN-g : 83   female: 35   1st Qu.: 6.0   1st Qu.:1.145  
+    ##                             Median :12.0   Median :1.400  
+    ##                             Mean   :13.7   Mean   :1.381  
+    ##                             3rd Qu.:20.0   3rd Qu.:1.692  
+    ##                             Max.   :44.0   Max.   :1.890  
+    ##                                                           
+    ##      weight            inherit       steroids          propylac     
+    ##  Min.   : 10.40   X-linked :131   Min.   :0.00000   Min.   :0.0000  
+    ##  1st Qu.: 20.25   autosomal: 72   1st Qu.:0.00000   1st Qu.:1.0000  
+    ##  Median : 33.40                   Median :0.00000   Median :1.0000  
+    ##  Mean   : 39.34                   Mean   :0.03448   Mean   :0.8473  
+    ##  3rd Qu.: 58.70                   3rd Qu.:0.00000   3rd Qu.:1.0000  
+    ##  Max.   :101.50                   Max.   :1.00000   Max.   :1.0000  
+    ##                                                                     
+    ##              hos.cat        tstart           enum           tstop      
+    ##  US:NIH          : 41   Min.   :  0.0   Min.   :1.000   Min.   :  4.0  
+    ##  US:other        :108   1st Qu.:  0.0   1st Qu.:1.000   1st Qu.:204.5  
+    ##  Europe:Amsterdam: 28   Median :  0.0   Median :1.000   Median :273.0  
+    ##  Europe:other    : 26   Mean   : 69.5   Mean   :1.665   Mean   :254.1  
+    ##                         3rd Qu.:121.0   3rd Qu.:2.000   3rd Qu.:320.0  
+    ##                         Max.   :373.0   Max.   :8.000   Max.   :439.0  
+    ##                                                                        
+    ##      status            BMI          
+    ##  Min.   :0.0000   Min.   :0.001237  
+    ##  1st Qu.:0.0000   1st Qu.:0.001616  
+    ##  Median :0.0000   Median :0.001762  
+    ##  Mean   :0.3744   Mean   :0.001890  
+    ##  3rd Qu.:1.0000   3rd Qu.:0.002096  
+    ##  Max.   :1.0000   Max.   :0.008321  
+    ## 
+
+The `summary()` function allows us to explore the number of counts and labels for categorical data and provides information on the distribution of continuous variables (e.g. min, max, mean)
+
+### EXCERCISE 6
+
+1.  Summarize the *iris* dataframe
+2.  What is the maximum Petal length?
+3.  How many individuals of the *setosa* species are there?
